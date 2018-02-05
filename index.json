@@ -1,0 +1,1021 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "const WoopackReactPlugin = require('./plugin');\n/**\n * This is the method called by Woopack when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Woopack} app The Woopack main container.\n * @ignore\n */\nconst loadPlugin = (app) => {\n  const plugin = new WoopackReactPlugin();\n  plugin.register(app);\n};\n\nmodule.exports = loadPlugin;\n",
+    "static": true,
+    "longname": "/Users/homer0/CODE/Node/woopack/woopack-plugin-webpack-react/src/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "function",
+    "name": "loadPlugin",
+    "memberof": "src/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~loadPlugin",
+    "access": "public",
+    "export": true,
+    "importPath": "woopack-plugin-webpack-react",
+    "importStyle": "loadPlugin",
+    "description": "This is the method called by Woopack when loading the plugin. It takes care of creating\na new instance of the plugin class and use it to register for the required events.",
+    "lineNumber": 8,
+    "ignore": true,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Woopack"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "app",
+        "description": "The Woopack main container."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 50,
+    "kind": "file",
+    "name": "src/plugin.js",
+    "content": "/**\n * This service is in charge of modifying a target Babel and entry settings in order to build\n * React code. It also manages the settings related to the React Hot Loader.\n */\nclass WoopackReactPlugin {\n  /**\n   * Class constructor.\n   * @ignore\n   */\n  constructor() {\n    /**\n     * A list of reducer events the service will listen for in order to intercept rules\n     * configurations and update them.\n     * @type {Array}\n     */\n    this.rulesEventsNames = [\n      'webpack-js-rules-configuration-for-node',\n      'webpack-js-rules-configuration-for-browser',\n    ];\n    /**\n     * The name of the reducer event the service will listen for and use to update a target entry\n     * settings if the target `hot` property is `true`.\n     * @type {string}\n     */\n    this.targetEventName = 'webpack-browser-development-configuration';\n    /**\n     * The required value a target `framework` setting needs to have in order for the service to\n     * take action.\n     * @type {string}\n     */\n    this.frameworkProperty = 'react';\n    /**\n     * The name of the Babel preset the service will insert into the targets configurations.\n     * @type {string}\n     */\n    this.presetName = 'react';\n    /**\n     * The name of the Babel plugin the service will insert into the targets configurations if\n     * the target `hot` property is `true`\n     * @type {string}\n     */\n    this.hotPluginName = 'react-hot-loader/babel';\n    /**\n     * The name of the entry the service will insert into the target if the target `hot` property\n     * is `true`.\n     * @type {string}\n     */\n    this.hotEntry = 'react-hot-loader/patch';\n    /**\n     * The name of the loader with the Babel configurations.\n     * @type {string}\n     */\n    this.babelLoaderName = 'babel-loader';\n  }\n  /**\n   * This is the method called when the plugin is loaded by Woopack. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Woopack} app The Woopack main container.\n   */\n  register(app) {\n    const events = app.get('events');\n    // Add the listeners for the rules.\n    this.rulesEventsNames.forEach((eventName) => {\n      events.on(eventName, (rules, params) => this.updateRules(rules, params.target));\n    });\n    // Add the listener for the target.\n    events.on(\n      this.targetEventName,\n      (config, params) => this.updateTargetConfiguration(config, params.target)\n    );\n  }\n  /**\n   * This method gets called when Woopack reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   */\n  updateRules(currentRules, target) {\n    let updatedRules;\n    // If the target `framework` setting is the right one...\n    if (target.framework === this.frameworkProperty) {\n      // ...copy the list of rules.\n      updatedRules = currentRules.slice();\n      // Get the first rule of the list (there's usually only one).\n      const [baseJSRule] = updatedRules;\n      // Get the index of the Babel loader.\n      const babelLoaderIndex = this._findBabelLoaderIndex(baseJSRule.use);\n      // If the Babel loader is preset...\n      if (babelLoaderIndex > -1) {\n        // ...replace it with an updated version.\n        baseJSRule.use[babelLoaderIndex] = this._updateBabelLoader(\n          baseJSRule.use[babelLoaderIndex],\n          target.hot\n        );\n      }\n    } else {\n      // ...otherwise, just set to return the received rules.\n      updatedRules = currentRules;\n    }\n\n    return currentRules;\n  }\n  /**\n   * This method gets called when Woopack reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   */\n  updateTargetConfiguration(currentConfiguration, target) {\n    let updatedConfiguration;\n    // If the target `framework` and `hot` have the required values...\n    if (target.framework === this.frameworkProperty && target.hot) {\n      // Copy the configuration.\n      updatedConfiguration = Object.assign({}, currentConfiguration);\n      // Update the `publicPath`, required by the loader.\n      updatedConfiguration.output.publicPath = '/';\n      // Get target entry name.\n      const [entryName] = Object.keys(updatedConfiguration.entry);\n      // Get the list of entries for the target.\n      const entries = updatedConfiguration.entry[entryName];\n      // Check if the `babel-polyfill` is present, since it always needs to be first.\n      const polyfillIndex = entries.indexOf('babel-polyfill');\n      // If the `babel-polyfill` is present...\n      if (polyfillIndex > -1) {\n        // ...push the required entry after it.\n        entries.splice(polyfillIndex + 1, 0, this.hotEntry);\n      } else {\n        // ...push the required entry as the first item.\n        entries.unshift(this.hotEntry);\n      }\n    } else {\n      // ...otherwise, just set to return the received configuration.\n      updatedConfiguration = currentConfiguration;\n    }\n\n    return updatedConfiguration;\n  }\n  /**\n   * Finds the index of the Babel loader on a list of loaders.\n   * @param {Array} loaders The list of loaders.\n   * @return {number}\n   * @ignore\n   * @access protected\n   */\n  _findBabelLoaderIndex(loaders) {\n    return loaders.findIndex((loader) => {\n      const isString = typeof loader === 'string';\n      return (isString && loader === this.babelLoaderName) ||\n        (!isString && loader.loader === this.babelLoaderName);\n    });\n  }\n  /**\n   * Updates an existing Babel loader configuration with the required presets and plugins to work\n   * with React code.\n   * The method will only modify the loader if is not on a string format and has an `options`\n   * object.\n   * @param {Object|string} babelLoader The loader to update.\n   * @param {boolean}       hot         Whether or not the target will run with HMR. This will\n   *                                    make the method disable the `modules` feature as is a\n   *                                    requirement of the React Hot Loader for it to be `false`.\n   * @return {Object|string}\n   * @ignore\n   * @access protected\n   */\n  _updateBabelLoader(babelLoader, hot) {\n    let updatedLoader;\n    /**\n     * If the loader is a `string` or it doesn't have an `options` property, then the project uses\n     * an external `.babelrc`, so it won't be updated.\n     */\n    if (typeof babelLoader !== 'string' && babelLoader.options) {\n      // Copy the loader reference.\n      updatedLoader = Object.assign({}, babelLoader);\n      // Access the loader options.\n      const { options } = updatedLoader;\n      // If it doesn't have a presets list, create it.\n      if (!options.presets) {\n        options.presets = [];\n      }\n      // Push the required preset.\n      options.presets.push([this.presetName]);\n      // If the target will run with HMR...\n      if (hot) {\n        // If it doesn't have a plugins list, create it.\n        if (!options.plugins) {\n          options.plugins = [];\n        }\n        // Push the required plugin.\n        options.plugins.push([this.hotPluginName]);\n        // Get the index of the `env` preset, in order to disable `modules`.\n        const envPresetIndex = options.presets.findIndex((preset) => {\n          const [presetName] = preset;\n          return presetName === 'env';\n        });\n        // If the `env` preset is present...\n        if (envPresetIndex > -1) {\n          // Get the `env` preset options.\n          const [, envPresetOptions] = options.presets[envPresetIndex];\n          // Disable `modules`.\n          envPresetOptions.modules = false;\n        }\n      }\n    } else {\n      updatedLoader = babelLoader;\n    }\n\n    return updatedLoader;\n  }\n}\n\nmodule.exports = WoopackReactPlugin;\n",
+    "static": true,
+    "longname": "/Users/homer0/CODE/Node/woopack/woopack-plugin-webpack-react/src/plugin.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 51,
+    "kind": "class",
+    "name": "WoopackReactPlugin",
+    "memberof": "src/plugin.js",
+    "static": true,
+    "longname": "src/plugin.js~WoopackReactPlugin",
+    "access": "public",
+    "export": true,
+    "importPath": "woopack-plugin-webpack-react/src/plugin.js",
+    "importStyle": "WoopackReactPlugin",
+    "description": "This service is in charge of modifying a target Babel and entry settings in order to build\nReact code. It also manages the settings related to the React Hot Loader.",
+    "lineNumber": 5,
+    "interface": false
+  },
+  {
+    "__docId__": 52,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#constructor",
+    "access": "public",
+    "description": "Class constructor.",
+    "lineNumber": 10,
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "name": "rulesEventsNames",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#rulesEventsNames",
+    "access": "public",
+    "description": "A list of reducer events the service will listen for in order to intercept rules\nconfigurations and update them.",
+    "lineNumber": 16,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Array"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "member",
+    "name": "targetEventName",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#targetEventName",
+    "access": "public",
+    "description": "The name of the reducer event the service will listen for and use to update a target entry\nsettings if the target `hot` property is `true`.",
+    "lineNumber": 25,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "member",
+    "name": "frameworkProperty",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#frameworkProperty",
+    "access": "public",
+    "description": "The required value a target `framework` setting needs to have in order for the service to\ntake action.",
+    "lineNumber": 31,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "member",
+    "name": "presetName",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#presetName",
+    "access": "public",
+    "description": "The name of the Babel preset the service will insert into the targets configurations.",
+    "lineNumber": 36,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "member",
+    "name": "hotPluginName",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#hotPluginName",
+    "access": "public",
+    "description": "The name of the Babel plugin the service will insert into the targets configurations if\nthe target `hot` property is `true`",
+    "lineNumber": 42,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "member",
+    "name": "hotEntry",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#hotEntry",
+    "access": "public",
+    "description": "The name of the entry the service will insert into the target if the target `hot` property\nis `true`.",
+    "lineNumber": 48,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "member",
+    "name": "babelLoaderName",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#babelLoaderName",
+    "access": "public",
+    "description": "The name of the loader with the Babel configurations.",
+    "lineNumber": 53,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "method",
+    "name": "register",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#register",
+    "access": "public",
+    "description": "This is the method called when the plugin is loaded by Woopack. It just gets the events service\nand registers the listeners for the reducer events that handles JS rules and target\nconfiguration.",
+    "lineNumber": 61,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Woopack"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "app",
+        "description": "The Woopack main container."
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 61,
+    "kind": "method",
+    "name": "updateRules",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#updateRules",
+    "access": "public",
+    "description": "This method gets called when Woopack reduces the JS rules of a target. It validates the target\nsettings and makes the necessary modifications to the Babel loader configuration.",
+    "lineNumber": 80,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "currentRules",
+        "description": "The list of JS rules for the Webpack configuration."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Target"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "The target information."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array"
+      ],
+      "spread": false,
+      "description": "The updated list of rules."
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "updateTargetConfiguration",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#updateTargetConfiguration",
+    "access": "public",
+    "description": "This method gets called when Woopack reduces a target configuration for Wepack. It validates\nthe target settings and if HMR is enabled, it updates the `entry` setting with the required\nchanges for the React Hot Loader.",
+    "lineNumber": 113,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "currentConfiguration",
+        "description": "The current configuration for the target."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Target"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "target",
+        "description": "The target information."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "The updated configuration."
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "method",
+    "name": "_findBabelLoaderIndex",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#_findBabelLoaderIndex",
+    "access": "protected",
+    "description": "Finds the index of the Babel loader on a list of loaders.",
+    "lineNumber": 149,
+    "ignore": true,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "loaders",
+        "description": "The list of loaders."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "method",
+    "name": "_updateBabelLoader",
+    "memberof": "src/plugin.js~WoopackReactPlugin",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/plugin.js~WoopackReactPlugin#_updateBabelLoader",
+    "access": "protected",
+    "description": "Updates an existing Babel loader configuration with the required presets and plugins to work\nwith React code.\nThe method will only modify the loader if is not on a string format and has an `options`\nobject.",
+    "lineNumber": 169,
+    "ignore": true,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object",
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "babelLoader",
+        "description": "The loader to update."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "hot",
+        "description": "Whether or not the target will run with HMR. This will\n                                   make the method disable the `modules` feature as is a\n                                   requirement of the React Hot Loader for it to be `false`."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object",
+        "string"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "file",
+    "name": "src/typedef.js",
+    "content": "/**\n * @external {Woopack}\n * https://homer0.github.io/woopack/class/src/app/index.js~Woopack.html\n */\n\n/**\n * @external {Target}\n * https://homer0.github.io/woopack/typedef/index.html#static-typedef-Target\n */\n",
+    "static": true,
+    "longname": "/Users/homer0/CODE/Node/woopack/woopack-plugin-webpack-react/src/typedef.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 66,
+    "kind": "external",
+    "name": "Woopack",
+    "externalLink": "https://homer0.github.io/woopack/class/src/app/index.js~Woopack.html",
+    "memberof": "src/typedef.js",
+    "static": true,
+    "longname": "src/typedef.js~Woopack",
+    "access": "public",
+    "description": ""
+  },
+  {
+    "__docId__": 67,
+    "kind": "external",
+    "name": "Target",
+    "externalLink": "https://homer0.github.io/woopack/typedef/index.html#static-typedef-Target",
+    "memberof": "src/typedef.js",
+    "static": true,
+    "longname": "src/typedef.js~Target",
+    "access": "public",
+    "description": ""
+  },
+  {
+    "kind": "index",
+    "content": "# woopack plugin for React on webpack\n\nAllows you to bundle a [React](https://reactjs.org/) project with [woopack](https://yarnpkg.com/en/package/woopack) using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/woopack-plugin-webpack).\n\n## Introduction\n\n[woopack](https://yarnpkg.com/en/package/woopack) allows you to configure a project without adding specific settings for a module bundler, then you can decide which build engine to use. This plugin is meant to be used when you are bundling a [React](https://reactjs.org/) and you are using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/woopack-plugin-webpack).\n\nIt adds the required presets to the [`babel-loader`](https://yarnpkg.com/en/package/babel-loader) configuration in order to handle [`JSX`](https://facebook.github.io/jsx/) code. It also takes care of modifying the webpack settings in order to implement the [`react-hot-loader`](https://yarnpkg.com/en/package/react-hot-loader) with both, the dev server and an [Express](https://expressjs.com)/[Jimpex](https://yarnpkg.com/en/package/jimpex) target.\n\n## Information\n\n| -            | -                                                                                      |\n|--------------|----------------------------------------------------------------------------------------|\n| Package      | woopack-plugin-webpack-react.                                                          |\n| Description  | Allows you to bundle a React project with woopack using the webpack build engine.      |\n| Node Version | >= v6.10.0                                                                             |\n\n## Usage\n\n1. You first need the build engine, so install [`woopack-plugin-webpack`](https://yarnpkg.com/en/package/woopack-plugin-webpack).\n2. If you changed it, set your target `engine` setting to `webpack`.\n3. Add a new setting to your target named `framework` and set its value to `react`.\n4. Done\n\nNow, when your target gets builded, the plugin will check if the target is using webpack and if the framework is React, then it will make the necessary changes to bundle the `JSX` code.\n\n### Hot loader\n\n> If you don't know what hot reload is, you should probably watch [Dan Abramov's talk on Hot Reloading with Time Travel](https://www.youtube.com/watch?v=xsSnOQynTHs).\n\nTo enable this feature, you just need to set the target `hot` setting to `true`:\n\n```js\nmodule.exports = {\n  targets: {\n    myTarget: {\n      type: 'browser',\n      framework: 'react',\n      hot: true,\n    },\n  },\n};\n```\n\nAnd that's all there is, if you are running the target by itself, it will configure the hot loader settings for the webpack dev server; and if you are using a Node target, the configuration will be made for the hot middleware.\n\n> If you don't know how to implement the middlewares on your Express/Jimpex app, you can check [the `woopack-plugin-webpack` documentation for it](https://homer0.github.io/woopack-plugin-webpack/#middleware-implementation).\n\n### Babel\n\nThis plugin only adds a new loader when hot reload is enabled, but leaving that aside, the only thing it does is modify the [Babel](https://babeljs.io) configuration in order to add the required changes:\n\n- Presets: `react`\n- Plugins: `react-hot-loader/babel`\n- It disables the `modules` feature on the `env` preset.\n\n\nSo, if for some reason you are overwriting the configuration woopack generates, instead of making sure you add those requirements, you should consider if you really need this plugin: The only advantage it can provide is the auto-configuration of the hot reload (which is kind of tricky :P), but if you are not using hot reload, you could just add the `react` preset when you overwrite the Babel configuration that would be all.\n\n## Development\n\nBefore doing anything, install the repository hooks:\n\n```bash\n# You can either use npm or yarn, it doesn't matter\nnpm run install-hooks\n```\n\n### NPM/Yarn Tasks\n\n| Task                    | Description                         |\n|-------------------------|-------------------------------------|\n| `npm run install-hooks` | Install the GIT repository hooks.   |\n| `npm test`              | Run the project unit tests.         |\n| `npm run lint`          | Lint the modified files.            |\n| `npm run lint:full`     | Lint the project code.              |\n| `npm run docs`          | Generate the project documentation. |\n\n### Testing\n\nI use [Jest](https://facebook.github.io/jest/) with [Jest-Ex](https://yarnpkg.com/en/package/jest-ex) to test the project. The configuration file is on `./.jestrc`, the tests and mocks are on `./tests` and the script that runs it is on `./utils/scripts/test`.\n\n### Linting\n\nI use [ESlint](http://eslint.org) to validate all our JS code. The configuration file for the project code is on `./.eslintrc` and for the tests on `./tests/.eslintrc` (which inherits from the one on the root), there's also an `./.eslintignore` to ignore some files on the process, and the script that runs it is on `./utils/scripts/lint`.\n\n### Documentation\n\nI use [ESDoc](http://esdoc.org) to generate HTML documentation for the project. The configuration file is on `./.esdocrc` and the script that runs it is on `./utils/scripts/docs`.",
+    "longname": "/Users/homer0/CODE/Node/woopack/woopack-plugin-webpack-react/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n    \"name\": \"woopack-plugin-webpack-react\",\n    \"description\": \"Allows you to bundle a React project with woopack using the webpack build engine.\",\n    \"homepage\": \"https://homer0.github.io/woopack-plugin-webpack-react/\",\n    \"version\": \"1.0.0\",\n    \"repository\": \"homer0/woopack-plugin-webpack-react\",\n    \"author\": \"Leonardo Apiwan (@homer0) <me@homer0.com>\",\n    \"license\": \"MIT\",\n    \"dependencies\": {\n      \"babel-preset-react\": \"6.24.1\",\n      \"react-hot-loader\": \"3.1.3\"\n    },\n    \"peerDependencies\": {\n\n    },\n    \"devDependencies\": {\n      \"wootils\": \"^1.1.1\",\n      \"eslint\": \"4.16.0\",\n      \"eslint-config-airbnb-base\": \"12.1.0\",\n      \"eslint-plugin-import\": \"2.8.0\",\n      \"eslint-plugin-node\": \"5.2.1\",\n      \"babel-preset-env\": \"1.6.1\",\n      \"jest-ex\": \"4.0.0\",\n      \"jest-cli\": \"22.1.4\",\n      \"jasmine-expect\": \"3.8.3\",\n      \"esdoc\": \"1.0.4\",\n      \"esdoc-standard-plugin\": \"1.0.0\",\n      \"esdoc-node\": \"1.0.3\",\n      \"coveralls\": \"3.0.0\"\n    },\n    \"engine-strict\": true,\n    \"engines\": {\n      \"node\": \">=6.0.0\",\n      \"npm\": \">=3.0.0\"\n    },\n    \"main\": \"src/index.js\",\n    \"scripts\": {\n      \"install-hooks\": \"./utils/hooks/install\",\n      \"test\": \"./utils/scripts/test\",\n      \"lint\": \"./utils/scripts/lint\",\n      \"lint:full\": \"./utils/scripts/lint-full\",\n      \"docs\": \"./utils/scripts/docs\"\n    }\n}\n",
+    "longname": "/Users/homer0/CODE/Node/woopack/woopack-plugin-webpack-react/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]
