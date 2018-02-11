@@ -2,7 +2,7 @@
  * This service is in charge of modifying a target Babel and entry settings in order to build
  * React code. It also manages the settings related to the React Hot Loader.
  */
-class WoopackReactPlugin {
+class ProjextReactPlugin {
   /**
    * Class constructor.
    * @ignore
@@ -53,10 +53,10 @@ class WoopackReactPlugin {
     this.babelLoaderName = 'babel-loader';
   }
   /**
-   * This is the method called when the plugin is loaded by Woopack. It just gets the events service
+   * This is the method called when the plugin is loaded by projext. It just gets the events service
    * and registers the listeners for the reducer events that handles JS rules and target
    * configuration.
-   * @param {Woopack} app The Woopack main container.
+   * @param {Projext} app The projext main container.
    */
   register(app) {
     const events = app.get('events');
@@ -71,7 +71,7 @@ class WoopackReactPlugin {
     );
   }
   /**
-   * This method gets called when Woopack reduces the JS rules of a target. It validates the target
+   * This method gets called when projext reduces the JS rules of a target. It validates the target
    * settings and makes the necessary modifications to the Babel loader configuration.
    * @param {Array}  currentRules The list of JS rules for the Webpack configuration.
    * @param {Target} target       The target information.
@@ -103,7 +103,7 @@ class WoopackReactPlugin {
     return currentRules;
   }
   /**
-   * This method gets called when Woopack reduces a target configuration for Wepack. It validates
+   * This method gets called when projext reduces a target configuration for Wepack. It validates
    * the target settings and if HMR is enabled, it updates the `entry` setting with the required
    * changes for the React Hot Loader.
    * @param {Object} currentConfiguration The current configuration for the target.
@@ -212,4 +212,4 @@ class WoopackReactPlugin {
   }
 }
 
-module.exports = WoopackReactPlugin;
+module.exports = ProjextReactPlugin;
