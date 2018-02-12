@@ -2,16 +2,16 @@ jest.unmock('/src/plugin');
 
 require('jasmine-expect');
 
-const WoopackReactPlugin = require('/src/plugin');
+const ProjextReactPlugin = require('/src/plugin');
 
-describe('plugin:woopackReact/main', () => {
+describe('plugin:projextReact/main', () => {
   it('should be instantiated', () => {
     // Given
     let sut = null;
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     // Then
-    expect(sut).toBeInstanceOf(WoopackReactPlugin);
+    expect(sut).toBeInstanceOf(ProjextReactPlugin);
     expect(sut.rulesEventsNames).toEqual([
       'webpack-js-rules-configuration-for-node',
       'webpack-js-rules-configuration-for-browser',
@@ -39,7 +39,7 @@ describe('plugin:woopackReact/main', () => {
       'webpack-browser-development-configuration',
     ];
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     // Then
     expect(app.get).toHaveBeenCalledTimes(1);
@@ -71,7 +71,7 @@ describe('plugin:woopackReact/main', () => {
     let reducer = null;
     let result = null;
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [[, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
@@ -100,7 +100,7 @@ describe('plugin:woopackReact/main', () => {
     let reducer = null;
     let result = null;
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [[, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
@@ -133,7 +133,7 @@ describe('plugin:woopackReact/main', () => {
       use: currentJSLoader.use,
     })];
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [[, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
@@ -174,7 +174,7 @@ describe('plugin:woopackReact/main', () => {
       use: [expectedBabelLoader],
     })];
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [[, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
@@ -217,7 +217,7 @@ describe('plugin:woopackReact/main', () => {
       use: [expectedBabelLoader],
     })];
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [[, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
@@ -263,7 +263,7 @@ describe('plugin:woopackReact/main', () => {
       use: [expectedBabelLoader],
     })];
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [[, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
@@ -294,7 +294,7 @@ describe('plugin:woopackReact/main', () => {
     let reducer = null;
     let result = null;
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
@@ -336,7 +336,7 @@ describe('plugin:woopackReact/main', () => {
       },
     };
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
@@ -384,7 +384,7 @@ describe('plugin:woopackReact/main', () => {
       },
     };
     // When
-    sut = new WoopackReactPlugin();
+    sut = new ProjextReactPlugin();
     sut.register(app);
     [,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
