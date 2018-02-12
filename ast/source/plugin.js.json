@@ -55,9 +55,9 @@
               "line": 5,
               "column": 24
             },
-            "identifierName": "WoopackReactPlugin"
+            "identifierName": "ProjextReactPlugin"
           },
-          "name": "WoopackReactPlugin",
+          "name": "ProjextReactPlugin",
           "leadingComments": null
         },
         "superClass": null,
@@ -1141,7 +1141,7 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * This is the method called when the plugin is loaded by Woopack. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Woopack} app The Woopack main container.\n   ",
+                  "value": "*\n   * This is the method called when the plugin is loaded by projext. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Projext} app The projext main container.\n   ",
                   "start": 1769,
                   "end": 2042,
                   "loc": {
@@ -2225,7 +2225,7 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * This is the method called when the plugin is loaded by Woopack. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Woopack} app The Woopack main container.\n   ",
+                  "value": "*\n   * This is the method called when the plugin is loaded by projext. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Projext} app The projext main container.\n   ",
                   "start": 1769,
                   "end": 2042,
                   "loc": {
@@ -2243,7 +2243,7 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * This method gets called when Woopack reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
+                  "value": "*\n   * This method gets called when projext reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
                   "start": 2461,
                   "end": 2849,
                   "loc": {
@@ -3667,7 +3667,7 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * This method gets called when Woopack reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
+                  "value": "*\n   * This method gets called when projext reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
                   "start": 2461,
                   "end": 2849,
                   "loc": {
@@ -3685,7 +3685,7 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * This method gets called when Woopack reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
+                  "value": "*\n   * This method gets called when projext reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
                   "start": 3760,
                   "end": 4202,
                   "loc": {
@@ -5685,7 +5685,7 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * This method gets called when Woopack reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
+                  "value": "*\n   * This method gets called when projext reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
                   "start": 3760,
                   "end": 4202,
                   "loc": {
@@ -9108,9 +9108,9 @@
               "line": 215,
               "column": 33
             },
-            "identifierName": "WoopackReactPlugin"
+            "identifierName": "ProjextReactPlugin"
           },
-          "name": "WoopackReactPlugin"
+          "name": "ProjextReactPlugin"
         },
         "name": "_",
         "leadingComments": [],
@@ -9157,9 +9157,9 @@
                 "line": 5,
                 "column": 24
               },
-              "identifierName": "WoopackReactPlugin"
+              "identifierName": "ProjextReactPlugin"
             },
-            "name": "WoopackReactPlugin",
+            "name": "ProjextReactPlugin",
             "leadingComments": null
           },
           "superClass": null,
@@ -10243,7 +10243,7 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * This is the method called when the plugin is loaded by Woopack. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Woopack} app The Woopack main container.\n   ",
+                    "value": "*\n   * This is the method called when the plugin is loaded by projext. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Projext} app The projext main container.\n   ",
                     "start": 1769,
                     "end": 2042,
                     "loc": {
@@ -11327,7 +11327,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * This is the method called when the plugin is loaded by Woopack. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Woopack} app The Woopack main container.\n   ",
+                    "value": "*\n   * This is the method called when the plugin is loaded by projext. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Projext} app The projext main container.\n   ",
                     "start": 1769,
                     "end": 2042,
                     "loc": {
@@ -11345,7 +11345,7 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * This method gets called when Woopack reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
+                    "value": "*\n   * This method gets called when projext reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
                     "start": 2461,
                     "end": 2849,
                     "loc": {
@@ -12769,7 +12769,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * This method gets called when Woopack reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
+                    "value": "*\n   * This method gets called when projext reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
                     "start": 2461,
                     "end": 2849,
                     "loc": {
@@ -12787,7 +12787,7 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * This method gets called when Woopack reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
+                    "value": "*\n   * This method gets called when projext reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
                     "start": 3760,
                     "end": 4202,
                     "loc": {
@@ -14787,7 +14787,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * This method gets called when Woopack reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
+                    "value": "*\n   * This method gets called when projext reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
                     "start": 3760,
                     "end": 4202,
                     "loc": {
@@ -18352,7 +18352,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * This is the method called when the plugin is loaded by Woopack. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Woopack} app The Woopack main container.\n   ",
+      "value": "*\n   * This is the method called when the plugin is loaded by projext. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Projext} app The projext main container.\n   ",
       "start": 1769,
       "end": 2042,
       "loc": {
@@ -18400,7 +18400,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * This method gets called when Woopack reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
+      "value": "*\n   * This method gets called when projext reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
       "start": 2461,
       "end": 2849,
       "loc": {
@@ -18528,7 +18528,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * This method gets called when Woopack reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
+      "value": "*\n   * This method gets called when projext reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
       "start": 3760,
       "end": 4202,
       "loc": {
@@ -18984,7 +18984,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "WoopackReactPlugin",
+      "value": "ProjextReactPlugin",
       "start": 185,
       "end": 203,
       "loc": {
@@ -20530,7 +20530,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * This is the method called when the plugin is loaded by Woopack. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Woopack} app The Woopack main container.\n   ",
+      "value": "*\n   * This is the method called when the plugin is loaded by projext. It just gets the events service\n   * and registers the listeners for the reducer events that handles JS rules and target\n   * configuration.\n   * @param {Projext} app The projext main container.\n   ",
       "start": 1769,
       "end": 2042,
       "loc": {
@@ -22646,7 +22646,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * This method gets called when Woopack reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
+      "value": "*\n   * This method gets called when projext reduces the JS rules of a target. It validates the target\n   * settings and makes the necessary modifications to the Babel loader configuration.\n   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.\n   * @param {Target} target       The target information.\n   * @return {Array} The updated list of rules.\n   ",
       "start": 2461,
       "end": 2849,
       "loc": {
@@ -25175,7 +25175,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * This method gets called when Woopack reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
+      "value": "*\n   * This method gets called when projext reduces a target configuration for Wepack. It validates\n   * the target settings and if HMR is enabled, it updates the `entry` setting with the required\n   * changes for the React Hot Loader.\n   * @param {Object} currentConfiguration The current configuration for the target.\n   * @param {Target} target               The target information.\n   * @return {Object} The updated configuration.\n   ",
       "start": 3760,
       "end": 4202,
       "loc": {
@@ -34848,7 +34848,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "WoopackReactPlugin",
+      "value": "ProjextReactPlugin",
       "start": 8174,
       "end": 8192,
       "loc": {

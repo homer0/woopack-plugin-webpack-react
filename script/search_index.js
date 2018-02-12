@@ -1,8 +1,8 @@
 window.esdocSearchIndex = [
   [
-    "woopack-plugin-webpack-react/src/plugin.js~woopackreactplugin",
-    "class/src/plugin.js~WoopackReactPlugin.html",
-    "<span>WoopackReactPlugin</span> <span class=\"search-result-import-path\">woopack-plugin-webpack-react/src/plugin.js</span>",
+    "projext-plugin-webpack-react/src/plugin.js~projextreactplugin",
+    "class/src/plugin.js~ProjextReactPlugin.html",
+    "<span>ProjextReactPlugin</span> <span class=\"search-result-import-path\">projext-plugin-webpack-react/src/plugin.js</span>",
     "class"
   ],
   [
@@ -300,63 +300,63 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/plugin.js~woopackreactplugin#babelloadername",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-member-babelLoaderName",
-    "src/plugin.js~WoopackReactPlugin#babelLoaderName",
+    "src/plugin.js~projextreactplugin#babelloadername",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-babelLoaderName",
+    "src/plugin.js~ProjextReactPlugin#babelLoaderName",
     "member"
   ],
   [
-    "src/plugin.js~woopackreactplugin#frameworkproperty",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-member-frameworkProperty",
-    "src/plugin.js~WoopackReactPlugin#frameworkProperty",
+    "src/plugin.js~projextreactplugin#frameworkproperty",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-frameworkProperty",
+    "src/plugin.js~ProjextReactPlugin#frameworkProperty",
     "member"
   ],
   [
-    "src/plugin.js~woopackreactplugin#hotentry",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-member-hotEntry",
-    "src/plugin.js~WoopackReactPlugin#hotEntry",
+    "src/plugin.js~projextreactplugin#hotentry",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-hotEntry",
+    "src/plugin.js~ProjextReactPlugin#hotEntry",
     "member"
   ],
   [
-    "src/plugin.js~woopackreactplugin#hotpluginname",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-member-hotPluginName",
-    "src/plugin.js~WoopackReactPlugin#hotPluginName",
+    "src/plugin.js~projextreactplugin#hotpluginname",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-hotPluginName",
+    "src/plugin.js~ProjextReactPlugin#hotPluginName",
     "member"
   ],
   [
-    "src/plugin.js~woopackreactplugin#presetname",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-member-presetName",
-    "src/plugin.js~WoopackReactPlugin#presetName",
+    "src/plugin.js~projextreactplugin#presetname",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-presetName",
+    "src/plugin.js~ProjextReactPlugin#presetName",
     "member"
   ],
   [
-    "src/plugin.js~woopackreactplugin#register",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-method-register",
-    "src/plugin.js~WoopackReactPlugin#register",
+    "src/plugin.js~projextreactplugin#register",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-method-register",
+    "src/plugin.js~ProjextReactPlugin#register",
     "method"
   ],
   [
-    "src/plugin.js~woopackreactplugin#ruleseventsnames",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-member-rulesEventsNames",
-    "src/plugin.js~WoopackReactPlugin#rulesEventsNames",
+    "src/plugin.js~projextreactplugin#ruleseventsnames",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-rulesEventsNames",
+    "src/plugin.js~ProjextReactPlugin#rulesEventsNames",
     "member"
   ],
   [
-    "src/plugin.js~woopackreactplugin#targeteventname",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-member-targetEventName",
-    "src/plugin.js~WoopackReactPlugin#targetEventName",
+    "src/plugin.js~projextreactplugin#targeteventname",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-targetEventName",
+    "src/plugin.js~ProjextReactPlugin#targetEventName",
     "member"
   ],
   [
-    "src/plugin.js~woopackreactplugin#updaterules",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-method-updateRules",
-    "src/plugin.js~WoopackReactPlugin#updateRules",
+    "src/plugin.js~projextreactplugin#updaterules",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-method-updateRules",
+    "src/plugin.js~ProjextReactPlugin#updateRules",
     "method"
   ],
   [
-    "src/plugin.js~woopackreactplugin#updatetargetconfiguration",
-    "class/src/plugin.js~WoopackReactPlugin.html#instance-method-updateTargetConfiguration",
-    "src/plugin.js~WoopackReactPlugin#updateTargetConfiguration",
+    "src/plugin.js~projextreactplugin#updatetargetconfiguration",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-method-updateTargetConfiguration",
+    "src/plugin.js~ProjextReactPlugin#updateTargetConfiguration",
     "method"
   ],
   [
@@ -366,15 +366,15 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/typedef.js~target",
-    "https://homer0.github.io/woopack/typedef/index.html#static-typedef-Target",
-    "src/typedef.js~Target",
+    "src/typedef.js~projext",
+    "https://homer0.github.io/projext/class/src/app/index.js~Projext.html",
+    "src/typedef.js~Projext",
     "external"
   ],
   [
-    "src/typedef.js~woopack",
-    "https://homer0.github.io/woopack/class/src/app/index.js~Woopack.html",
-    "src/typedef.js~Woopack",
+    "src/typedef.js~target",
+    "https://homer0.github.io/projext/typedef/index.html#static-typedef-Target",
+    "src/typedef.js~Target",
     "external"
   ]
 ]

@@ -70,9 +70,9 @@
                   "line": 1,
                   "column": 25
                 },
-                "identifierName": "WoopackReactPlugin"
+                "identifierName": "ProjextReactPlugin"
               },
-              "name": "WoopackReactPlugin"
+              "name": "ProjextReactPlugin"
             }
           }
         ],
@@ -99,7 +99,7 @@
         "trailingComments": [
           {
             "type": "CommentBlock",
-            "value": "*\n * This is the method called by Woopack when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Woopack} app The Woopack main container.\n * @ignore\n ",
+            "value": "*\n * This is the method called by projext when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Projext} app The projext main container.\n * @ignore\n ",
             "start": 43,
             "end": 290,
             "loc": {
@@ -287,9 +287,9 @@
                                 "line": 9,
                                 "column": 39
                               },
-                              "identifierName": "WoopackReactPlugin"
+                              "identifierName": "ProjextReactPlugin"
                             },
-                            "name": "WoopackReactPlugin"
+                            "name": "ProjextReactPlugin"
                           },
                           "arguments": []
                         }
@@ -646,9 +646,9 @@
                                   "line": 9,
                                   "column": 39
                                 },
-                                "identifierName": "WoopackReactPlugin"
+                                "identifierName": "ProjextReactPlugin"
                               },
-                              "name": "WoopackReactPlugin"
+                              "name": "ProjextReactPlugin"
                             },
                             "arguments": []
                           }
@@ -766,7 +766,7 @@
           "leadingComments": [
             {
               "type": "CommentBlock",
-              "value": "*\n * This is the method called by Woopack when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Woopack} app The Woopack main container.\n * @ignore\n ",
+              "value": "*\n * This is the method called by projext when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Projext} app The projext main container.\n * @ignore\n ",
               "start": 43,
               "end": 290,
               "loc": {
@@ -790,7 +790,7 @@
   "comments": [
     {
       "type": "CommentBlock",
-      "value": "*\n * This is the method called by Woopack when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Woopack} app The Woopack main container.\n * @ignore\n ",
+      "value": "*\n * This is the method called by projext when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Projext} app The projext main container.\n * @ignore\n ",
       "start": 43,
       "end": 290,
       "loc": {
@@ -846,7 +846,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "WoopackReactPlugin",
+      "value": "ProjextReactPlugin",
       "start": 7,
       "end": 25,
       "loc": {
@@ -941,7 +941,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * This is the method called by Woopack when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Woopack} app The Woopack main container.\n * @ignore\n ",
+      "value": "*\n * This is the method called by projext when loading the plugin. It takes care of creating\n * a new instance of the plugin class and use it to register for the required events.\n * @param {Projext} app The projext main container.\n * @ignore\n ",
       "start": 43,
       "end": 290,
       "loc": {
@@ -1284,7 +1284,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "WoopackReactPlugin",
+      "value": "ProjextReactPlugin",
       "start": 342,
       "end": 360,
       "loc": {

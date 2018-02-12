@@ -33,7 +33,7 @@
     "innerComments": [
       {
         "type": "CommentBlock",
-        "value": "*\n * @external {Woopack}\n * https://homer0.github.io/woopack/class/src/app/index.js~Woopack.html\n ",
+        "value": "*\n * @external {Projext}\n * https://homer0.github.io/projext/class/src/app/index.js~Projext.html\n ",
         "start": 0,
         "end": 102,
         "loc": {
@@ -49,7 +49,7 @@
       },
       {
         "type": "CommentBlock",
-        "value": "*\n * @external {Target}\n * https://homer0.github.io/woopack/typedef/index.html#static-typedef-Target\n ",
+        "value": "*\n * @external {Target}\n * https://homer0.github.io/projext/typedef/index.html#static-typedef-Target\n ",
         "start": 104,
         "end": 210,
         "loc": {
@@ -68,7 +68,7 @@
   "comments": [
     {
       "type": "CommentBlock",
-      "value": "*\n * @external {Woopack}\n * https://homer0.github.io/woopack/class/src/app/index.js~Woopack.html\n ",
+      "value": "*\n * @external {Projext}\n * https://homer0.github.io/projext/class/src/app/index.js~Projext.html\n ",
       "start": 0,
       "end": 102,
       "loc": {
@@ -84,7 +84,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * @external {Target}\n * https://homer0.github.io/woopack/typedef/index.html#static-typedef-Target\n ",
+      "value": "*\n * @external {Target}\n * https://homer0.github.io/projext/typedef/index.html#static-typedef-Target\n ",
       "start": 104,
       "end": 210,
       "loc": {
@@ -102,7 +102,7 @@
   "tokens": [
     {
       "type": "CommentBlock",
-      "value": "*\n * @external {Woopack}\n * https://homer0.github.io/woopack/class/src/app/index.js~Woopack.html\n ",
+      "value": "*\n * @external {Projext}\n * https://homer0.github.io/projext/class/src/app/index.js~Projext.html\n ",
       "start": 0,
       "end": 102,
       "loc": {
@@ -118,7 +118,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * @external {Target}\n * https://homer0.github.io/woopack/typedef/index.html#static-typedef-Target\n ",
+      "value": "*\n * @external {Target}\n * https://homer0.github.io/projext/typedef/index.html#static-typedef-Target\n ",
       "start": 104,
       "end": 210,
       "loc": {
