@@ -1,10 +1,10 @@
-# woopack plugin for React on webpack
+# projext plugin for React on webpack
 
-Allows you to bundle a [React](https://reactjs.org/) project with [woopack](https://yarnpkg.com/en/package/woopack) using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/woopack-plugin-webpack).
+Allows you to bundle a [React](https://reactjs.org/) project with [projext](https://yarnpkg.com/en/package/projext) using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/projext-plugin-webpack).
 
 ## Introduction
 
-[woopack](https://yarnpkg.com/en/package/woopack) allows you to configure a project without adding specific settings for a module bundler, then you can decide which build engine to use. This plugin is meant to be used when you are bundling a [React](https://reactjs.org/) and you are using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/woopack-plugin-webpack).
+[projext](https://yarnpkg.com/en/package/projext) allows you to configure a project without adding specific settings for a module bundler, then you can decide which build engine to use. This plugin is meant to be used when you are bundling a [React](https://reactjs.org/) and you are using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/projext-plugin-webpack).
 
 It adds the required presets to the [`babel-loader`](https://yarnpkg.com/en/package/babel-loader) configuration in order to handle [`JSX`](https://facebook.github.io/jsx/) code. It also takes care of modifying the webpack settings in order to implement the [`react-hot-loader`](https://yarnpkg.com/en/package/react-hot-loader) with both, the dev server and an [Express](https://expressjs.com)/[Jimpex](https://yarnpkg.com/en/package/jimpex) target.
 
@@ -12,13 +12,13 @@ It adds the required presets to the [`babel-loader`](https://yarnpkg.com/en/pack
 
 | -            | -                                                                                      |
 |--------------|----------------------------------------------------------------------------------------|
-| Package      | woopack-plugin-webpack-react.                                                          |
-| Description  | Allows you to bundle a React project with woopack using the webpack build engine.      |
+| Package      | projext-plugin-webpack-react.                                                          |
+| Description  | Allows you to bundle a React project with projext using the webpack build engine.      |
 | Node Version | >= v6.10.0                                                                             |
 
 ## Usage
 
-1. You first need the build engine, so install [`woopack-plugin-webpack`](https://yarnpkg.com/en/package/woopack-plugin-webpack).
+1. You first need the build engine, so install [`projext-plugin-webpack`](https://yarnpkg.com/en/package/projext-plugin-webpack).
 2. If you changed it, set your target `engine` setting to `webpack`.
 3. Add a new setting to your target named `framework` and set its value to `react`.
 4. Done
@@ -45,7 +45,7 @@ module.exports = {
 
 And that's all there is, if you are running the target by itself, it will configure the hot loader settings for the webpack dev server; and if you are using a Node target, the configuration will be made for the hot middleware.
 
-> If you don't know how to implement the middlewares on your Express/Jimpex app, you can check [the `woopack-plugin-webpack` documentation for it](https://homer0.github.io/woopack-plugin-webpack/#middleware-implementation).
+> If you don't know how to implement the middlewares on your Express/Jimpex app, you can check [the `projext-plugin-webpack` documentation for it](https://homer0.github.io/projext-plugin-webpack/#middleware-implementation).
 
 ### Babel
 
@@ -56,7 +56,7 @@ This plugin only adds a new loader when hot reload is enabled, but leaving that 
 - It disables the `modules` feature on the `env` preset.
 
 
-So, if for some reason you are overwriting the configuration woopack generates, instead of making sure you add those requirements, you should consider if you really need this plugin: The only advantage it can provide is the auto-configuration of the hot reload (which is kind of tricky :P), but if you are not using hot reload, you could just add the `react` preset when you overwrite the Babel configuration that would be all.
+So, if for some reason you are overwriting the configuration projext generates, instead of making sure you add those requirements, you should consider if you really need this plugin: The only advantage it can provide is the auto-configuration of the hot reload (which is kind of tricky :P), but if you are not using hot reload, you could just add the `react` preset when you overwrite the Babel configuration that would be all.
 
 ## Development
 
