@@ -24,7 +24,7 @@ describe('plugin:projextReact/main', () => {
     expect(sut.babelLoaderName).toBe('babel-loader');
   });
 
-  it('should register the listeners for the Webpack plugin', () => {
+  it('should register the listeners for the webpack plugin', () => {
     // Given
     const events = {
       on: jest.fn(),
@@ -124,6 +124,7 @@ describe('plugin:projextReact/main', () => {
       use: [
         'babel-loader',
       ],
+      include: [],
     };
     const currentRules = [currentJSLoader];
     let sut = null;
@@ -131,6 +132,7 @@ describe('plugin:projextReact/main', () => {
     let result = null;
     const expectedLoaders = [Object.assign({}, currentJSLoader, {
       use: currentJSLoader.use,
+      include: [],
     })];
     // When
     sut = new ProjextReactPlugin();
@@ -159,6 +161,7 @@ describe('plugin:projextReact/main', () => {
     const currentJSLoader = {
       test: /\.jsx?$/i,
       use: [currentBabelLoader],
+      include: [],
     };
     const currentRules = [currentJSLoader];
     let sut = null;
@@ -172,6 +175,7 @@ describe('plugin:projextReact/main', () => {
     };
     const expectedLoaders = [Object.assign({}, currentJSLoader, {
       use: [expectedBabelLoader],
+      include: [],
     })];
     // When
     sut = new ProjextReactPlugin();
@@ -201,6 +205,7 @@ describe('plugin:projextReact/main', () => {
     const currentJSLoader = {
       test: /\.jsx?$/i,
       use: [currentBabelLoader],
+      include: [],
     };
     const currentRules = [currentJSLoader];
     let sut = null;
@@ -215,6 +220,7 @@ describe('plugin:projextReact/main', () => {
     };
     const expectedLoaders = [Object.assign({}, currentJSLoader, {
       use: [expectedBabelLoader],
+      include: [],
     })];
     // When
     sut = new ProjextReactPlugin();
@@ -225,7 +231,7 @@ describe('plugin:projextReact/main', () => {
     expect(result).toEqual(expectedLoaders);
   });
 
-  it('should update disable the `modules` setting on the Babel config for HMR', () => {
+  it('should disable the `modules` setting on the Babel config for HMR', () => {
     // Given
     const events = {
       on: jest.fn(),
@@ -247,6 +253,7 @@ describe('plugin:projextReact/main', () => {
     const currentJSLoader = {
       test: /\.jsx?$/i,
       use: [currentBabelLoader],
+      include: [],
     };
     const currentRules = [currentJSLoader];
     let sut = null;
@@ -261,6 +268,68 @@ describe('plugin:projextReact/main', () => {
     };
     const expectedLoaders = [Object.assign({}, currentJSLoader, {
       use: [expectedBabelLoader],
+      include: [],
+    })];
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [[, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(expectedLoaders);
+  });
+
+  it('should include other targets paths if the target uses SSR', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const otherTarget = {
+      name: 'other-target',
+      folders: {
+        source: 'src/other-target',
+      },
+    };
+    const targets = {
+      getTarget: jest.fn(() => otherTarget),
+    };
+    const appServices = {
+      events,
+      targets,
+    };
+    const app = {
+      get: jest.fn((service) => appServices[service]),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [otherTarget.name],
+      },
+    };
+    const currentBabelLoader = {
+      loader: 'babel-loader',
+      options: {},
+    };
+    const currentJSLoader = {
+      test: /\.jsx?$/i,
+      use: [currentBabelLoader],
+      include: [],
+    };
+    const currentRules = [currentJSLoader];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    const expectedBabelLoader = {
+      loader: 'babel-loader',
+      options: {
+        presets: [['react']],
+      },
+    };
+    const expectedLoaders = [Object.assign({}, currentJSLoader, {
+      use: [expectedBabelLoader],
+      include: [
+        new RegExp(otherTarget.folders.source),
+      ],
     })];
     // When
     sut = new ProjextReactPlugin();

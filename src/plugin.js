@@ -30,6 +30,15 @@ class ProjextReactPlugin {
      */
     this.frameworkProperty = 'react';
     /**
+     * The default values for the options a target can use to customize how the plugin works.
+     * @type {Object}
+     * @property {Array} ssr A list of other targets being used for SSR (Server Side Rendering) and
+     *                       which paths should be included by processing the JSX.
+     */
+    this.frameworkOptions = {
+      ssr: [],
+    };
+    /**
      * The name of the Babel preset the service will insert into the targets configurations.
      * @type {string}
      */
@@ -62,7 +71,9 @@ class ProjextReactPlugin {
     const events = app.get('events');
     // Add the listeners for the rules.
     this.rulesEventsNames.forEach((eventName) => {
-      events.on(eventName, (rules, params) => this.updateRules(rules, params.target));
+      events.on(eventName, (rules, params) => (
+        this.updateRules(rules, params.target, app.get('targets'))
+      ));
     });
     // Add the listener for the target.
     events.on(
@@ -73,11 +84,13 @@ class ProjextReactPlugin {
   /**
    * This method gets called when projext reduces the JS rules of a target. It validates the target
    * settings and makes the necessary modifications to the Babel loader configuration.
-   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.
-   * @param {Target} target       The target information.
+   * @param {Array}   currentRules The list of JS rules for the webpack configuration.
+   * @param {Target}  target       The target information.
+   * @param {Targets} targets      The targets service, to get the information of of targets the
+   *                               one being processed may need for SSR.
    * @return {Array} The updated list of rules.
    */
-  updateRules(currentRules, target) {
+  updateRules(currentRules, target, targets) {
     let updatedRules;
     // If the target `framework` setting is the right one...
     if (target.framework === this.frameworkProperty) {
@@ -89,6 +102,18 @@ class ProjextReactPlugin {
       const babelLoaderIndex = this._findBabelLoaderIndex(baseJSRule.use);
       // If the Babel loader is preset...
       if (babelLoaderIndex > -1) {
+        // ...merge the default options withy any overwrite the target may have.
+        const options = Object.assign(
+          {},
+          this.frameworkOptions,
+          target.frameworkOptions || {}
+        );
+        // Push the paths for SSR targets
+        baseJSRule.include.push(...options.ssr.map((name) => {
+          const targetInfo = targets.getTarget(name);
+          return new RegExp(targetInfo.folders.source);
+        }));
+
         // ...replace it with an updated version.
         baseJSRule.use[babelLoaderIndex] = this._updateBabelLoader(
           baseJSRule.use[babelLoaderIndex],
