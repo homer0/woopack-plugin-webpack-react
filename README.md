@@ -25,6 +25,32 @@ It adds the required presets to the [`babel-loader`](https://yarnpkg.com/en/pack
 
 Now, when your target gets builded, the plugin will check if the target is using webpack and if the framework is React, then it will make the necessary changes to bundle the `JSX` code.
 
+### Server side rendering
+
+> Server side rendering (SSR) is when you render your application on the server (backend) as a string, serve it on the browser and then you app runs in order to add all the JS magic.
+
+Let's say you have a `backend` target with your Node server code, and a `frontend` target with your React code, and you want to require your `frontend` code on the `backend` in order to use `ReactDOM.renderToString(...)`:
+
+For your `backend` target you'll have to define its `framework` property to `react`, so the plugin can include the JSX loader, and then add an extra option to enable SSR from `backend` to `frontend`:
+
+```js
+module.exports = {
+  targets: {
+    backend: {
+      type: 'node',
+      framework: 'react',
+      frameworkOptions: {
+        ssr: ['frontend'],
+      },
+    },
+  },
+};
+```
+
+This new setting (`frameworkOptions.ssr`) is where you tell the plugin that the targets on that list should also have their JSX parsed for you to use on Node.
+
+Done, now you can `require`/`import` files from your `frontend` target on the `backend` target and everything will work.
+
 ### Hot loader
 
 > If you don't know what hot reload is, you should probably watch [Dan Abramov's talk on Hot Reloading with Time Travel](https://www.youtube.com/watch?v=xsSnOQynTHs).
