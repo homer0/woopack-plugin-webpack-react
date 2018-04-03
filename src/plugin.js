@@ -9,14 +9,23 @@ class ProjextReactPlugin {
    */
   constructor() {
     /**
-     * A list of reducer events the service will listen for in order to intercept rules
-     * configurations and update them.
-     * @type {Array}
+     * The name of the reducer event the service will listen in order to intercept the rules for
+     * JS files and update them.
+     * @type {string}
      */
-    this.rulesEventsNames = [
-      'webpack-js-rules-configuration-for-node',
-      'webpack-js-rules-configuration-for-browser',
-    ];
+    this.jsRulesEvent = 'webpack-js-rules-configuration';
+    /**
+     * The name of the reducer event the service will listen in order to intercept the rules for
+     * fonts files, and if the target implements SSR, update them.
+     * @type {string}
+     */
+    this.fontsRulesEvent = 'webpack-fonts-rules-configuration';
+    /**
+     * The name of the reducer event the service will listen in order to intercept the rules for
+     * images files, and if the target implements SSR, update them.
+     * @type {string}
+     */
+    this.imagesRulesEvent = 'webpack-images-rules-configuration';
     /**
      * The name of the reducer event the service will listen for and use to update a target entry
      * settings if the target `hot` property is `true`.
@@ -29,6 +38,15 @@ class ProjextReactPlugin {
      * @type {string}
      */
     this.frameworkProperty = 'react';
+    /**
+     * The default values for the options a target can use to customize how the plugin works.
+     * @type {Object}
+     * @property {Array} ssr A list of other targets being used for SSR (Server Side Rendering) and
+     *                       which paths should be included by processing the JSX.
+     */
+    this.frameworkOptions = {
+      ssr: [],
+    };
     /**
      * The name of the Babel preset the service will insert into the targets configurations.
      * @type {string}
@@ -54,17 +72,25 @@ class ProjextReactPlugin {
   }
   /**
    * This is the method called when the plugin is loaded by projext. It just gets the events service
-   * and registers the listeners for the reducer events that handles JS rules and target
-   * configuration.
+   * and registers the listeners for the reducer events that handle the JS rules, fonts rules,
+   * images rules and target configuration.
    * @param {Projext} app The projext main container.
    */
   register(app) {
     const events = app.get('events');
-    // Add the listeners for the rules.
-    this.rulesEventsNames.forEach((eventName) => {
-      events.on(eventName, (rules, params) => this.updateRules(rules, params.target));
-    });
-    // Add the listener for the target.
+    // Add the listener for the JS files rules event.
+    events.on(this.jsRulesEvent, (rules, params) => (
+      this.updateJSRules(rules, params.target, app.get('targets'))
+    ));
+    // Add the listener for the font files rules event.
+    events.on(this.fontsRulesEvent, (rules, params) => (
+      this.updateFontsRules(rules, params.target, app.get('targets'))
+    ));
+    // Add the listener for the font files rules event.
+    events.on(this.imagesRulesEvent, (rules, params) => (
+      this.updateImagesRules(rules, params.target, app.get('targets'))
+    ));
+    // Add the listener for the target configuration event.
     events.on(
       this.targetEventName,
       (config, params) => this.updateTargetConfiguration(config, params.target)
@@ -73,11 +99,13 @@ class ProjextReactPlugin {
   /**
    * This method gets called when projext reduces the JS rules of a target. It validates the target
    * settings and makes the necessary modifications to the Babel loader configuration.
-   * @param {Array}  currentRules The list of JS rules for the Webpack configuration.
-   * @param {Target} target       The target information.
+   * @param {Array}   currentRules The list of JS rules for the webpack configuration.
+   * @param {Target}  target       The target information.
+   * @param {Targets} targets      The targets service, to get the information of targets the
+   *                               one being processed may need for SSR.
    * @return {Array} The updated list of rules.
    */
-  updateRules(currentRules, target) {
+  updateJSRules(currentRules, target, targets) {
     let updatedRules;
     // If the target `framework` setting is the right one...
     if (target.framework === this.frameworkProperty) {
@@ -89,6 +117,14 @@ class ProjextReactPlugin {
       const babelLoaderIndex = this._findBabelLoaderIndex(baseJSRule.use);
       // If the Babel loader is preset...
       if (babelLoaderIndex > -1) {
+        // ...get the framework options for the target.
+        const options = this._getTargetOptions(target);
+        // Push the paths for SSR targets
+        baseJSRule.include.push(...options.ssr.map((name) => {
+          const targetInfo = targets.getTarget(name);
+          return new RegExp(targetInfo.folders.source);
+        }));
+
         // ...replace it with an updated version.
         baseJSRule.use[babelLoaderIndex] = this._updateBabelLoader(
           baseJSRule.use[babelLoaderIndex],
@@ -100,7 +136,92 @@ class ProjextReactPlugin {
       updatedRules = currentRules;
     }
 
+    // Return the updated rules
     return currentRules;
+  }
+  /**
+   * This method gets called when projext reduces the fonts files rules of a target. It validates
+   * the target settings, and if the target implements SSR, it adds the `include` setting on
+   * the SVG rule for the SSR targets directories.
+   * @param {Array}   currentRules The list of fonts rules for the webpack configuration.
+   * @param {Target}  target       The target information.
+   * @param {Targets} targets      The targets service, to get the SSR targets information.
+   * @return {Array} The updated list of rules.
+   */
+  updateFontsRules(currentRules, target, targets) {
+    let updatedRules;
+    // If the target `framework` setting is the right one...
+    if (target.framework === this.frameworkProperty) {
+      // ...copy the list of rules.
+      updatedRules = currentRules.slice();
+      // Find the loader used for SVG files.
+      const svgLoader = updatedRules.find((rule) => '.svg'.match(rule.test));
+      // If the loader was found...
+      if (svgLoader) {
+        // ...get the target framework options.
+        const options = this._getTargetOptions(target);
+        // If the `include` option is a list, keep it like that, otherwise, convert it into a list.
+        const include = Array.isArray(svgLoader.include) ?
+          svgLoader.include :
+          [svgLoader.include];
+
+        // Loop all the possible SSR targets and add their _"fonts path"_ to the `include` option.
+        include.push(...options.ssr.map((name) => (
+          this._getTargetFontsRegExp(targets.getTarget(name))
+        )));
+
+        // Overwrite the SVG loder `include` option.
+        svgLoader.include = include;
+      }
+    } else {
+      // ...otherwise, just set to return the received rules.
+      updatedRules = currentRules;
+    }
+
+    // Return the updated rules.
+    return updatedRules;
+  }
+  /**
+   * This method gets called when projext reduces the images files rules of a target. It validates
+   * the target settings, and if the target implements SSR, it adds the `exclude` setting on
+   * the SVG rule for the SSR targets fonts directories.
+   * @param {Array}   currentRules The list of fonts rules for the webpack configuration.
+   * @param {Target}  target       The target information.
+   * @param {Targets} targets      The targets service, to get the SSR targets information.
+   * @return {Array} The updated list of rules.
+   */
+  updateImagesRules(currentRules, target, targets) {
+    let updatedRules;
+    // If the target `framework` setting is the right one...
+    if (target.framework === this.frameworkProperty) {
+      // ...copy the list of rules.
+      updatedRules = currentRules.slice();
+      // Find the loader used for SVG files.
+      const svgLoader = updatedRules.find((rule) => '.svg'.match(rule.test));
+      // If the loader was found...
+      if (svgLoader) {
+        // ...get the target framework options.
+        const options = this._getTargetOptions(target);
+        // If the `exclude` option is a list, keep it like that, otherwise, convert it into a list.
+        const exclude = Array.isArray(svgLoader.exclude) ?
+          svgLoader.exclude :
+          [svgLoader.exclude];
+
+        // Loop all the possible SSR targets and add their _"fonts path"_ to the `exclude` option.
+        exclude.push(...options.ssr.map((name) => (
+          this._getTargetFontsRegExp(targets.getTarget(name))
+        )));
+
+        // Overwrite the SVG loder `exclude` option.
+        svgLoader.exclude = exclude;
+      }
+    } else {
+      // ...otherwise, just set to return the received rules.
+      updatedRules = currentRules;
+    }
+
+    // Return the updated rules.
+    return updatedRules;
   }
   /**
    * This method gets called when projext reduces a target configuration for Wepack. It validates
@@ -138,6 +259,34 @@ class ProjextReactPlugin {
     }
 
     return updatedConfiguration;
+  }
+  /**
+   * Merge the default framework options with the overwrites the target may have, and return the
+   * dictionary with the _"final options"_, ready to use.
+   * @param {Target} target The target information.
+   * @return {Object}
+   * @ignore
+   * @access protected
+   */
+  _getTargetOptions(target) {
+    return Object.assign(
+      {},
+      this.frameworkOptions,
+      target.frameworkOptions || {}
+    );
+  }
+  /**
+   * Gets the RegExp for a fonts folder inside a given target source directory. This is used on
+   * the fonts SVG loader to `include` the files and on the images SVG loader to `exclude` them,
+   * that way SVG files inside a folder that matches the RegExp get handled as fonts and if they
+   * don't match it, they get handled as images.
+   * @param {Target} target The target information.
+   * @return {RegExp}
+   * @ignore
+   * @access protected
+   */
+  _getTargetFontsRegExp(target) {
+    return new RegExp(`${target.paths.source}/(?:.*?/)?fonts/.*?`, 'i');
   }
   /**
    * Finds the index of the Babel loader on a list of loaders.

@@ -12,10 +12,9 @@ describe('plugin:projextReact/main', () => {
     sut = new ProjextReactPlugin();
     // Then
     expect(sut).toBeInstanceOf(ProjextReactPlugin);
-    expect(sut.rulesEventsNames).toEqual([
-      'webpack-js-rules-configuration-for-node',
-      'webpack-js-rules-configuration-for-browser',
-    ]);
+    expect(sut.jsRulesEvent).toBe('webpack-js-rules-configuration');
+    expect(sut.fontsRulesEvent).toBe('webpack-fonts-rules-configuration');
+    expect(sut.imagesRulesEvent).toBe('webpack-images-rules-configuration');
     expect(sut.targetEventName).toBe('webpack-browser-development-configuration');
     expect(sut.frameworkProperty).toBe('react');
     expect(sut.presetName).toBe('react');
@@ -24,7 +23,7 @@ describe('plugin:projextReact/main', () => {
     expect(sut.babelLoaderName).toBe('babel-loader');
   });
 
-  it('should register the listeners for the Webpack plugin', () => {
+  it('should register the listeners for the webpack plugin', () => {
     // Given
     const events = {
       on: jest.fn(),
@@ -34,8 +33,9 @@ describe('plugin:projextReact/main', () => {
     };
     let sut = null;
     const expectedEvents = [
-      'webpack-js-rules-configuration-for-node',
-      'webpack-js-rules-configuration-for-browser',
+      'webpack-js-rules-configuration',
+      'webpack-fonts-rules-configuration',
+      'webpack-images-rules-configuration',
       'webpack-browser-development-configuration',
     ];
     // When
@@ -50,7 +50,7 @@ describe('plugin:projextReact/main', () => {
     });
   });
 
-  it('shouldn\'t modify the rules of a target with an unknown framework property', () => {
+  it('shouldn\'t modify the JS rules of a target with an unknown framework property', () => {
     // Given
     const events = {
       on: jest.fn(),
@@ -79,7 +79,7 @@ describe('plugin:projextReact/main', () => {
     expect(result).toEqual(currentRules);
   });
 
-  it('shouldn\'t modify the rules of a target that doesn\'t have a Babel loader', () => {
+  it('shouldn\'t modify the JS rules of a target that doesn\'t have a Babel loader', () => {
     // Given
     const events = {
       on: jest.fn(),
@@ -124,6 +124,7 @@ describe('plugin:projextReact/main', () => {
       use: [
         'babel-loader',
       ],
+      include: [],
     };
     const currentRules = [currentJSLoader];
     let sut = null;
@@ -131,6 +132,7 @@ describe('plugin:projextReact/main', () => {
     let result = null;
     const expectedLoaders = [Object.assign({}, currentJSLoader, {
       use: currentJSLoader.use,
+      include: [],
     })];
     // When
     sut = new ProjextReactPlugin();
@@ -159,6 +161,7 @@ describe('plugin:projextReact/main', () => {
     const currentJSLoader = {
       test: /\.jsx?$/i,
       use: [currentBabelLoader],
+      include: [],
     };
     const currentRules = [currentJSLoader];
     let sut = null;
@@ -172,6 +175,7 @@ describe('plugin:projextReact/main', () => {
     };
     const expectedLoaders = [Object.assign({}, currentJSLoader, {
       use: [expectedBabelLoader],
+      include: [],
     })];
     // When
     sut = new ProjextReactPlugin();
@@ -201,6 +205,7 @@ describe('plugin:projextReact/main', () => {
     const currentJSLoader = {
       test: /\.jsx?$/i,
       use: [currentBabelLoader],
+      include: [],
     };
     const currentRules = [currentJSLoader];
     let sut = null;
@@ -215,6 +220,7 @@ describe('plugin:projextReact/main', () => {
     };
     const expectedLoaders = [Object.assign({}, currentJSLoader, {
       use: [expectedBabelLoader],
+      include: [],
     })];
     // When
     sut = new ProjextReactPlugin();
@@ -225,7 +231,7 @@ describe('plugin:projextReact/main', () => {
     expect(result).toEqual(expectedLoaders);
   });
 
-  it('should update disable the `modules` setting on the Babel config for HMR', () => {
+  it('should disable the `modules` setting on the Babel config for HMR', () => {
     // Given
     const events = {
       on: jest.fn(),
@@ -247,6 +253,7 @@ describe('plugin:projextReact/main', () => {
     const currentJSLoader = {
       test: /\.jsx?$/i,
       use: [currentBabelLoader],
+      include: [],
     };
     const currentRules = [currentJSLoader];
     let sut = null;
@@ -261,6 +268,7 @@ describe('plugin:projextReact/main', () => {
     };
     const expectedLoaders = [Object.assign({}, currentJSLoader, {
       use: [expectedBabelLoader],
+      include: [],
     })];
     // When
     sut = new ProjextReactPlugin();
@@ -269,6 +277,511 @@ describe('plugin:projextReact/main', () => {
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedLoaders);
+  });
+
+  it('should include other targets paths if the target uses SSR', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const otherTarget = {
+      name: 'other-target',
+      folders: {
+        source: 'src/other-target',
+      },
+    };
+    const targets = {
+      getTarget: jest.fn(() => otherTarget),
+    };
+    const appServices = {
+      events,
+      targets,
+    };
+    const app = {
+      get: jest.fn((service) => appServices[service]),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [otherTarget.name],
+      },
+    };
+    const currentBabelLoader = {
+      loader: 'babel-loader',
+      options: {},
+    };
+    const currentJSLoader = {
+      test: /\.jsx?$/i,
+      use: [currentBabelLoader],
+      include: [],
+    };
+    const currentRules = [currentJSLoader];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    const expectedBabelLoader = {
+      loader: 'babel-loader',
+      options: {
+        presets: [['react']],
+      },
+    };
+    const expectedLoaders = [Object.assign({}, currentJSLoader, {
+      use: [expectedBabelLoader],
+      include: [
+        new RegExp(otherTarget.folders.source),
+      ],
+    })];
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [[, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(expectedLoaders);
+  });
+
+  it('shouldn\'t modify the fonts rules of a target with an unknown framework property', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'angularjs',
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('shouldn\'t modify the fonts rules of a target that doesn\'t have framework options', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'react',
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('shouldn\'t modify the fonts rules of a target that doesn\'t implement SSR', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [],
+      },
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('shouldn\'t modify the fonts rules if there\'s no SVG loader', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [],
+      },
+    };
+    const currentRules = [{
+      test: /\.not-svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('should update the fonts rules to include SSR targets', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const otherTarget = {
+      name: 'other-target',
+      paths: {
+        source: 'src/other-target',
+      },
+    };
+    const targets = {
+      getTarget: jest.fn(() => otherTarget),
+    };
+    const appServices = {
+      events,
+      targets,
+    };
+    const app = {
+      get: jest.fn((service) => appServices[service]),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [otherTarget.name],
+      },
+    };
+    const currentLoader = {
+      test: /\.svg$/i,
+      include: /fonts/i,
+    };
+    const currentRules = [currentLoader];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    const expectedRules = [Object.assign({}, currentLoader, {
+      include: [
+        currentLoader.include,
+        new RegExp(`${otherTarget.paths.source}/(?:.*?/)?fonts/.*?`, 'i'),
+      ],
+    })];
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(expectedRules);
+  });
+
+  it('should update the fonts rules even if it already includes an `include` setting', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const otherTarget = {
+      name: 'other-target',
+      paths: {
+        source: 'src/other-target',
+      },
+    };
+    const targets = {
+      getTarget: jest.fn(() => otherTarget),
+    };
+    const appServices = {
+      events,
+      targets,
+    };
+    const app = {
+      get: jest.fn((service) => appServices[service]),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [otherTarget.name],
+      },
+    };
+    const currentLoader = {
+      test: /\.svg$/i,
+      include: [/fonts/i],
+    };
+    const currentRules = [currentLoader];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    const expectedRules = [Object.assign({}, currentLoader, {
+      include: [
+        currentLoader.include[0],
+        new RegExp(`${otherTarget.paths.source}/(?:.*?/)?fonts/.*?`, 'i'),
+      ],
+    })];
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(expectedRules);
+  });
+
+  it('shouldn\'t modify the images rules of a target with an unknown framework property', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'angularjs',
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('shouldn\'t modify the images rules of a target that doesn\'t have framework options', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'react',
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('shouldn\'t modify the images rules of a target that doesn\'t implement SSR', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [],
+      },
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('shouldn\'t modify the images rules if there\'s no SVG loader', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [],
+      },
+    };
+    const currentRules = [{
+      test: /\.not-svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('should update the fonts rules to include SSR targets', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const otherTarget = {
+      name: 'other-target',
+      paths: {
+        source: 'src/other-target',
+      },
+    };
+    const targets = {
+      getTarget: jest.fn(() => otherTarget),
+    };
+    const appServices = {
+      events,
+      targets,
+    };
+    const app = {
+      get: jest.fn((service) => appServices[service]),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [otherTarget.name],
+      },
+    };
+    const currentLoader = {
+      test: /\.svg$/i,
+      exclude: /fonts/i,
+    };
+    const currentRules = [currentLoader];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    const expectedRules = [Object.assign({}, currentLoader, {
+      exclude: [
+        currentLoader.exclude,
+        new RegExp(`${otherTarget.paths.source}/(?:.*?/)?fonts/.*?`, 'i'),
+      ],
+    })];
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(expectedRules);
+  });
+
+  it('should update the images rules even if it already includes an `include` setting', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const otherTarget = {
+      name: 'other-target',
+      paths: {
+        source: 'src/other-target',
+      },
+    };
+    const targets = {
+      getTarget: jest.fn(() => otherTarget),
+    };
+    const appServices = {
+      events,
+      targets,
+    };
+    const app = {
+      get: jest.fn((service) => appServices[service]),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [otherTarget.name],
+      },
+    };
+    const currentLoader = {
+      test: /\.svg$/i,
+      exclude: [/fonts/i],
+    };
+    const currentRules = [currentLoader];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    const expectedRules = [Object.assign({}, currentLoader, {
+      exclude: [
+        currentLoader.exclude[0],
+        new RegExp(`${otherTarget.paths.source}/(?:.*?/)?fonts/.*?`, 'i'),
+      ],
+    })];
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(expectedRules);
   });
 
   it('shouldn\'t update the target entry if HMR is disabled', () => {
@@ -296,7 +809,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(targetConfig);
@@ -338,7 +851,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(expectedConfig);
@@ -386,7 +899,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(expectedConfig);
