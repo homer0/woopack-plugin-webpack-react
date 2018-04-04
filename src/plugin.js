@@ -16,6 +16,18 @@ class ProjextReactPlugin {
     this.jsRulesEvent = 'webpack-js-rules-configuration';
     /**
      * The name of the reducer event the service will listen in order to intercept the rules for
+     * SCSS files and update them.
+     * @type {string}
+     */
+    this.scssRulesEvent = 'webpack-scss-rules-configuration';
+    /**
+     * The name of the reducer event the service will listen in order to intercept the rules for
+     * css files and update them.
+     * @type {string}
+     */
+    this.cssRulesEvent = 'webpack-css-rules-configuration';
+    /**
+     * The name of the reducer event the service will listen in order to intercept the rules for
      * fonts files, and if the target implements SSR, update them.
      * @type {string}
      */
@@ -82,6 +94,14 @@ class ProjextReactPlugin {
     events.on(this.jsRulesEvent, (rules, params) => (
       this.updateJSRules(rules, params.target, app.get('targets'))
     ));
+    // Add the listener for the SCSS files rules event.
+    events.on(this.scssRulesEvent, (rules, params) => (
+      this.updateStylesRules(rules, params.target, app.get('targets'))
+    ));
+    // Add the listener for the CSS files rules event.
+    events.on(this.cssRulesEvent, (rules, params) => (
+      this.updateStylesRules(rules, params.target, app.get('targets'))
+    ));
     // Add the listener for the font files rules event.
     events.on(this.fontsRulesEvent, (rules, params) => (
       this.updateFontsRules(rules, params.target, app.get('targets'))
@@ -138,6 +158,45 @@ class ProjextReactPlugin {
 
     // Return the updated rules
     return currentRules;
+  }
+  /**
+   * This method gets called when projext reduces the stylesheet (for both SCSS and CSS) rules of a
+   * target. It validates the target settings, and if the target implements SSR, it adds the
+   * `include` setting on the rule for the SSR targets directories.
+   * @param {Array}   currentRules The list of fonts rules for the webpack configuration.
+   * @param {Target}  target       The target information.
+   * @param {Targets} targets      The targets service, to get the SSR targets information.
+   * @return {Array} The updated list of rules.
+   */
+  updateStylesRules(currentRules, target, targets) {
+    let updatedRules;
+    // If the target `framework` setting is the right one...
+    if (target.framework === this.frameworkProperty) {
+      // ...copy the list of rules.
+      updatedRules = currentRules.slice();
+      // Get the first rule of the list (there's usually only one).
+      const [mainRule] = updatedRules;
+      // Get the target framework options.
+      const options = this._getTargetOptions(target);
+      // If the `include` option is a list, keep it like that, otherwise, convert it into a list.
+      const include = Array.isArray(mainRule.include) ?
+        mainRule.include :
+        [mainRule.include];
+
+      // Loop all the possible SSR targets and add their paths to the `include` option.
+      include.push(...options.ssr.map((name) => (
+        new RegExp(targets.getTarget(name).folders.source)
+      )));
+
+      // Overwrite the rule `include` option.
+      mainRule.include = include;
+    } else {
+      // ...otherwise, just set to return the received rules.
+      updatedRules = currentRules;
+    }
+
+    // Return the updated rules.
+    return updatedRules;
   }
   /**
    * This method gets called when projext reduces the fonts files rules of a target. It validates

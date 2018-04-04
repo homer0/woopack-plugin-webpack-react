@@ -13,6 +13,8 @@ describe('plugin:projextReact/main', () => {
     // Then
     expect(sut).toBeInstanceOf(ProjextReactPlugin);
     expect(sut.jsRulesEvent).toBe('webpack-js-rules-configuration');
+    expect(sut.scssRulesEvent).toBe('webpack-scss-rules-configuration');
+    expect(sut.cssRulesEvent).toBe('webpack-css-rules-configuration');
     expect(sut.fontsRulesEvent).toBe('webpack-fonts-rules-configuration');
     expect(sut.imagesRulesEvent).toBe('webpack-images-rules-configuration');
     expect(sut.targetEventName).toBe('webpack-browser-development-configuration');
@@ -34,6 +36,8 @@ describe('plugin:projextReact/main', () => {
     let sut = null;
     const expectedEvents = [
       'webpack-js-rules-configuration',
+      'webpack-scss-rules-configuration',
+      'webpack-css-rules-configuration',
       'webpack-fonts-rules-configuration',
       'webpack-images-rules-configuration',
       'webpack-browser-development-configuration',
@@ -340,7 +344,7 @@ describe('plugin:projextReact/main', () => {
     expect(result).toEqual(expectedLoaders);
   });
 
-  it('shouldn\'t modify the fonts rules of a target with an unknown framework property', () => {
+  it('shouldn\'t modify the styles rules of a target with an unknown framework property', () => {
     // Given
     const events = {
       on: jest.fn(),
@@ -369,6 +373,194 @@ describe('plugin:projextReact/main', () => {
     expect(result).toEqual(currentRules);
   });
 
+  it('shouldn\'t modify the styles rules of a target that doesn\'t have framework options', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'react',
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('shouldn\'t modify the styles rules of a target that doesn\'t implement SSR', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [],
+      },
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
+  it('should update the styles rules to include SSR targets', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const otherTarget = {
+      name: 'other-target',
+      folders: {
+        source: 'src/other-target',
+      },
+    };
+    const targets = {
+      getTarget: jest.fn(() => otherTarget),
+    };
+    const appServices = {
+      events,
+      targets,
+    };
+    const app = {
+      get: jest.fn((service) => appServices[service]),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [otherTarget.name],
+      },
+    };
+    const currentLoader = {
+      include: /css/i,
+    };
+    const currentRules = [currentLoader];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    const expectedRules = [Object.assign({}, currentLoader, {
+      include: [
+        currentLoader.include,
+        new RegExp(otherTarget.folders.source),
+      ],
+    })];
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(expectedRules);
+  });
+
+  it('should update the styles rules even if it already includes an `include` setting', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const otherTarget = {
+      name: 'other-target',
+      folders: {
+        source: 'src/other-target',
+      },
+    };
+    const targets = {
+      getTarget: jest.fn(() => otherTarget),
+    };
+    const appServices = {
+      events,
+      targets,
+    };
+    const app = {
+      get: jest.fn((service) => appServices[service]),
+    };
+    const target = {
+      framework: 'react',
+      frameworkOptions: {
+        ssr: [otherTarget.name],
+      },
+    };
+    const currentLoader = {
+      include: [/css/i],
+    };
+    const currentRules = [currentLoader];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    const expectedRules = [Object.assign({}, currentLoader, {
+      include: [
+        currentLoader.include[0],
+        new RegExp(otherTarget.folders.source),
+      ],
+    })];
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(expectedRules);
+  });
+
+  it('shouldn\'t modify the fonts rules of a target with an unknown framework property', () => {
+    // Given
+    const events = {
+      on: jest.fn(),
+    };
+    const app = {
+      get: jest.fn(() => events),
+    };
+    const target = {
+      framework: 'angularjs',
+    };
+    const currentRules = [{
+      test: /\.svg$/i,
+      use: [
+        'some-random-loader',
+      ],
+    }];
+    let sut = null;
+    let reducer = null;
+    let result = null;
+    // When
+    sut = new ProjextReactPlugin();
+    sut.register(app);
+    [,,, [, reducer]] = events.on.mock.calls;
+    result = reducer(currentRules, { target });
+    // Then
+    expect(result).toEqual(currentRules);
+  });
+
   it('shouldn\'t modify the fonts rules of a target that doesn\'t have framework options', () => {
     // Given
     const events = {
@@ -392,7 +584,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -424,7 +616,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -456,7 +648,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -506,7 +698,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -556,7 +748,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -585,7 +777,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -614,7 +806,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -646,7 +838,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -678,7 +870,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -728,7 +920,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -778,7 +970,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -809,7 +1001,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(targetConfig);
@@ -851,7 +1043,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(expectedConfig);
@@ -899,7 +1091,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(expectedConfig);
