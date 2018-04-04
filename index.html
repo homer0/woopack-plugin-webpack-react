@@ -32,6 +32,7 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/plugin.js~ProjextReactPlugin.html">ProjextReactPlugin</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://homer0.github.io/projext/class/src/app/index.js~Projext.html">Projext</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://homer0.github.io/projext/typedef/index.html#static-typedef-Target">Target</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://homer0.github.io/projext/class/src/services/targets/targets.js~Targets.html">Targets</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -68,6 +69,25 @@
 <li>Done</li>
 </ol>
 <p>Now, when your target gets builded, the plugin will check if the target is using webpack and if the framework is React, then it will make the necessary changes to bundle the <code>JSX</code> code.</p>
+<h3 id="server-side-rendering">Server side rendering</h3><blockquote>
+<p>Server side rendering (SSR) is when you render your application on the server (backend) as a string, serve it on the browser and then you app runs in order to add all the JS magic.</p>
+</blockquote>
+<p>Let&apos;s say you have a <code>backend</code> target with your Node server code, and a <code>frontend</code> target with your React code, and you want to require your <code>frontend</code> code on the <code>backend</code> in order to use <code>ReactDOM.renderToString(...)</code>:</p>
+<p>For your <code>backend</code> target you&apos;ll have to define its <code>framework</code> property to <code>react</code>, so the plugin can include the JSX loader, and then add an extra option to enable SSR from <code>backend</code> to <code>frontend</code>:</p>
+<pre><code class="lang-js"><code class="source-code prettyprint">module.exports = {
+  targets: {
+    backend: {
+      type: &apos;node&apos;,
+      framework: &apos;react&apos;,
+      frameworkOptions: {
+        ssr: [&apos;frontend&apos;],
+      },
+    },
+  },
+};</code>
+</code></pre>
+<p>This new setting (<code>frameworkOptions.ssr</code>) is where you tell the plugin that the targets on that list should also have their JSX parsed for you to use on Node.</p>
+<p>Done, now you can <code>require</code>/<code>import</code> files from your <code>frontend</code> target on the <code>backend</code> target and everything will work.</p>
 <h3 id="hot-loader">Hot loader</h3><blockquote>
 <p>If you don&apos;t know what hot reload is, you should probably watch <a href="https://www.youtube.com/watch?v=xsSnOQynTHs">Dan Abramov&apos;s talk on Hot Reloading with Time Travel</a>.</p>
 </blockquote>

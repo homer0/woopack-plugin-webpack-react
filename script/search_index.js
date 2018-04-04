@@ -306,6 +306,24 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/plugin.js~projextreactplugin#cssrulesevent",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-cssRulesEvent",
+    "src/plugin.js~ProjextReactPlugin#cssRulesEvent",
+    "member"
+  ],
+  [
+    "src/plugin.js~projextreactplugin#fontsrulesevent",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-fontsRulesEvent",
+    "src/plugin.js~ProjextReactPlugin#fontsRulesEvent",
+    "member"
+  ],
+  [
+    "src/plugin.js~projextreactplugin#frameworkoptions",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-frameworkOptions",
+    "src/plugin.js~ProjextReactPlugin#frameworkOptions",
+    "member"
+  ],
+  [
     "src/plugin.js~projextreactplugin#frameworkproperty",
     "class/src/plugin.js~ProjextReactPlugin.html#instance-member-frameworkProperty",
     "src/plugin.js~ProjextReactPlugin#frameworkProperty",
@@ -324,6 +342,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/plugin.js~projextreactplugin#imagesrulesevent",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-imagesRulesEvent",
+    "src/plugin.js~ProjextReactPlugin#imagesRulesEvent",
+    "member"
+  ],
+  [
+    "src/plugin.js~projextreactplugin#jsrulesevent",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-jsRulesEvent",
+    "src/plugin.js~ProjextReactPlugin#jsRulesEvent",
+    "member"
+  ],
+  [
     "src/plugin.js~projextreactplugin#presetname",
     "class/src/plugin.js~ProjextReactPlugin.html#instance-member-presetName",
     "src/plugin.js~ProjextReactPlugin#presetName",
@@ -336,9 +366,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/plugin.js~projextreactplugin#ruleseventsnames",
-    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-rulesEventsNames",
-    "src/plugin.js~ProjextReactPlugin#rulesEventsNames",
+    "src/plugin.js~projextreactplugin#scssrulesevent",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-member-scssRulesEvent",
+    "src/plugin.js~ProjextReactPlugin#scssRulesEvent",
     "member"
   ],
   [
@@ -348,9 +378,27 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/plugin.js~projextreactplugin#updaterules",
-    "class/src/plugin.js~ProjextReactPlugin.html#instance-method-updateRules",
-    "src/plugin.js~ProjextReactPlugin#updateRules",
+    "src/plugin.js~projextreactplugin#updatefontsrules",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-method-updateFontsRules",
+    "src/plugin.js~ProjextReactPlugin#updateFontsRules",
+    "method"
+  ],
+  [
+    "src/plugin.js~projextreactplugin#updateimagesrules",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-method-updateImagesRules",
+    "src/plugin.js~ProjextReactPlugin#updateImagesRules",
+    "method"
+  ],
+  [
+    "src/plugin.js~projextreactplugin#updatejsrules",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-method-updateJSRules",
+    "src/plugin.js~ProjextReactPlugin#updateJSRules",
+    "method"
+  ],
+  [
+    "src/plugin.js~projextreactplugin#updatestylesrules",
+    "class/src/plugin.js~ProjextReactPlugin.html#instance-method-updateStylesRules",
+    "src/plugin.js~ProjextReactPlugin#updateStylesRules",
     "method"
   ],
   [
@@ -375,6 +423,12 @@ window.esdocSearchIndex = [
     "src/typedef.js~target",
     "https://homer0.github.io/projext/typedef/index.html#static-typedef-Target",
     "src/typedef.js~Target",
+    "external"
+  ],
+  [
+    "src/typedef.js~targets",
+    "https://homer0.github.io/projext/class/src/services/targets/targets.js~Targets.html",
+    "src/typedef.js~Targets",
     "external"
   ]
 ]
