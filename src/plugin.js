@@ -22,12 +22,6 @@ class ProjextReactPlugin {
     this.scssRulesEvent = 'webpack-scss-rules-configuration';
     /**
      * The name of the reducer event the service will listen in order to intercept the rules for
-     * css files and update them.
-     * @type {string}
-     */
-    this.cssRulesEvent = 'webpack-css-rules-configuration';
-    /**
-     * The name of the reducer event the service will listen in order to intercept the rules for
      * fonts files, and if the target implements SSR, update them.
      * @type {string}
      */
@@ -98,10 +92,6 @@ class ProjextReactPlugin {
     events.on(this.scssRulesEvent, (rules, params) => (
       this.updateStylesRules(rules, params.target, app.get('targets'))
     ));
-    // Add the listener for the CSS files rules event.
-    events.on(this.cssRulesEvent, (rules, params) => (
-      this.updateStylesRules(rules, params.target, app.get('targets'))
-    ));
     // Add the listener for the font files rules event.
     events.on(this.fontsRulesEvent, (rules, params) => (
       this.updateFontsRules(rules, params.target, app.get('targets'))
@@ -160,9 +150,9 @@ class ProjextReactPlugin {
     return currentRules;
   }
   /**
-   * This method gets called when projext reduces the stylesheet (for both SCSS and CSS) rules of a
-   * target. It validates the target settings, and if the target implements SSR, it adds the
-   * `include` setting on the rule for the SSR targets directories.
+   * This method gets called when projext reduces the SCSS rules of a target. It validates the
+   * target settings, and if the target implements SSR, it adds the `include` setting on the rule
+   * for the SSR targets directories.
    * @param {Array}   currentRules The list of fonts rules for the webpack configuration.
    * @param {Target}  target       The target information.
    * @param {Targets} targets      The targets service, to get the SSR targets information.
