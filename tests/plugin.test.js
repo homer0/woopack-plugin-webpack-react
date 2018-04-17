@@ -14,7 +14,6 @@ describe('plugin:projextReact/main', () => {
     expect(sut).toBeInstanceOf(ProjextReactPlugin);
     expect(sut.jsRulesEvent).toBe('webpack-js-rules-configuration');
     expect(sut.scssRulesEvent).toBe('webpack-scss-rules-configuration');
-    expect(sut.cssRulesEvent).toBe('webpack-css-rules-configuration');
     expect(sut.fontsRulesEvent).toBe('webpack-fonts-rules-configuration');
     expect(sut.imagesRulesEvent).toBe('webpack-images-rules-configuration');
     expect(sut.targetEventName).toBe('webpack-browser-development-configuration');
@@ -37,7 +36,6 @@ describe('plugin:projextReact/main', () => {
     const expectedEvents = [
       'webpack-js-rules-configuration',
       'webpack-scss-rules-configuration',
-      'webpack-css-rules-configuration',
       'webpack-fonts-rules-configuration',
       'webpack-images-rules-configuration',
       'webpack-browser-development-configuration',
@@ -396,7 +394,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -526,7 +524,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,, [, reducer]] = events.on.mock.calls;
+    [, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -555,7 +553,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -584,7 +582,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -616,7 +614,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -648,7 +646,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -698,7 +696,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -748,7 +746,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,, [, reducer]] = events.on.mock.calls;
+    [,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -777,7 +775,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -806,7 +804,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -870,7 +868,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(currentRules);
@@ -920,7 +918,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -970,7 +968,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,,, [, reducer]] = events.on.mock.calls;
+    [,,, [, reducer]] = events.on.mock.calls;
     result = reducer(currentRules, { target });
     // Then
     expect(result).toEqual(expectedRules);
@@ -1001,7 +999,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,,,, [, reducer]] = events.on.mock.calls;
+    [,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(targetConfig);
@@ -1043,7 +1041,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,,,, [, reducer]] = events.on.mock.calls;
+    [,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(expectedConfig);
@@ -1091,7 +1089,7 @@ describe('plugin:projextReact/main', () => {
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
-    [,,,,, [, reducer]] = events.on.mock.calls;
+    [,,,, [, reducer]] = events.on.mock.calls;
     result = reducer(targetConfig, { target });
     // Then
     expect(result).toEqual(expectedConfig);
