@@ -1,80 +1,98 @@
 /**
- * This service is in charge of modifying a target Babel and entry settings in order to build
- * React code. It also manages the settings related to the React Hot Loader.
+ * It updates targets Babel configuration in order to add support for JSX and hot reload. And if
+ * a target implements SSR, it takes care of including the paths to the other target(s) so their
+ * files will be processed/transpiled.
  */
 class ProjextReactPlugin {
   /**
    * Class constructor.
-   * @ignore
    */
   constructor() {
     /**
-     * The name of the reducer event the service will listen in order to intercept the rules for
-     * JS files and update them.
+     * The name of the event triggered when the files rules of a target are created. This service
+     * will listen for it, and if the target implements SSR, it will add the other target(s) to the
+     * file rules.
      * @type {string}
+     * @access protected
+     * @ignore
      */
-    this.jsRulesEvent = 'webpack-js-rules-configuration';
+    this._rulesEvent = 'target-file-rules';
     /**
-     * The name of the reducer event the service will listen in order to intercept the rules for
-     * SCSS files and update them.
+     * The name of the reducer event the service will listen for in order to add support for JSX
+     * and HMR.
      * @type {string}
+     * @access protected
+     * @ignore
      */
-    this.scssRulesEvent = 'webpack-scss-rules-configuration';
+    this._babelConfigurationEvent = 'babel-configuration';
     /**
-     * The name of the reducer event the service will listen in order to intercept the rules for
-     * fonts files, and if the target implements SSR, update them.
-     * @type {string}
+     * The list of React packages that should never end up on the bundle. For browser targets,
+     * this is only added if the target is also a library.
+     * @type {Array}
+     * @access protected
+     * @ignore
      */
-    this.fontsRulesEvent = 'webpack-fonts-rules-configuration';
+    this._externalModules = [
+      'react',
+      'react-dom',
+      'react-dom/server',
+    ];
     /**
-     * The name of the reducer event the service will listen in order to intercept the rules for
-     * images files, and if the target implements SSR, update them.
+     * The name of the reducer event the service will listen for in order to exclude React packages
+     * from the bundle when the target is for Node or it's a browser library.
      * @type {string}
+     * @access protected
+     * @ignore
      */
-    this.imagesRulesEvent = 'webpack-images-rules-configuration';
+    this._externalSettingsEventName = 'webpack-externals-configuration';
     /**
-     * The name of the reducer event the service will listen for and use to update a target entry
-     * settings if the target `hot` property is `true`.
+     * The name of the reducer event the service will listen for in order to update a target entry
+     * settings when the target implements HMR.
      * @type {string}
+     * @access protected
+     * @ignore
      */
-    this.targetEventName = 'webpack-browser-development-configuration';
+    this._targetEntriesEvent = 'webpack-browser-development-configuration';
     /**
      * The required value a target `framework` setting needs to have in order for the service to
      * take action.
      * @type {string}
+     * @access protected
+     * @ignore
      */
-    this.frameworkProperty = 'react';
+    this._frameworkProperty = 'react';
     /**
      * The default values for the options a target can use to customize how the plugin works.
      * @type {Object}
      * @property {Array} ssr A list of other targets being used for SSR (Server Side Rendering) and
      *                       which paths should be included by processing the JSX.
+     * @access protected
+     * @ignore
      */
-    this.frameworkOptions = {
+    this._frameworkOptions = {
       ssr: [],
     };
     /**
-     * The name of the Babel preset the service will insert into the targets configurations.
+     * The name of the Babel preset required to add support for React's JSX.
      * @type {string}
+     * @access protected
+     * @ignore
      */
-    this.presetName = 'react';
+    this._babelPreset = 'react';
     /**
-     * The name of the Babel plugin the service will insert into the targets configurations if
-     * the target `hot` property is `true`
+     * The name of the plugin required for HMR.
      * @type {string}
+     * @access protected
+     * @ignore
      */
-    this.hotPluginName = 'react-hot-loader/babel';
+    this._hotPlugin = 'react-hot-loader/babel';
     /**
-     * The name of the entry the service will insert into the target if the target `hot` property
-     * is `true`.
+     * The name of the required entry in order to enable HMR.
      * @type {string}
+     * @access protected
+     * @ignore
      */
-    this.hotEntry = 'react-hot-loader/patch';
-    /**
-     * The name of the loader with the Babel configurations.
-     * @type {string}
-     */
-    this.babelLoaderName = 'babel-loader';
+    this._hotEntry = 'react-hot-loader/patch';
   }
   /**
    * This is the method called when the plugin is loaded by projext. It just gets the events service
@@ -83,194 +101,76 @@ class ProjextReactPlugin {
    * @param {Projext} app The projext main container.
    */
   register(app) {
+    // Get the `events` service to listen for the events.
     const events = app.get('events');
-    // Add the listener for the JS files rules event.
-    events.on(this.jsRulesEvent, (rules, params) => (
-      this.updateJSRules(rules, params.target, app.get('targets'))
+    // Get the `target` service to send to the method that needs to obtain information for SSR.
+    const targets = app.get('targets');
+    // Get the `babelHelper` to send to the method that updates the Babel configuration.
+    const babelHelper = app.get('babelHelper');
+    // Add the listener for the event that includes SSR paths.
+    events.on(this._rulesEvent, (rules, target) => {
+      this._updateTargetFileRules(rules, target, targets);
+    });
+    // Add the listener for the event that updates the Babel configuration.
+    events.on(this._babelConfigurationEvent, (configuration, target) => (
+      this._updateBabelConfiguration(configuration, target, babelHelper)
     ));
-    // Add the listener for the SCSS files rules event.
-    events.on(this.scssRulesEvent, (rules, params) => (
-      this.updateStylesRules(rules, params.target, app.get('targets'))
+    // Add the listener for the event that updates the target entries.
+    events.on(this._targetEntriesEvent, (config, params) => (
+      this._updateTargetEntry(config, params.target)
     ));
-    // Add the listener for the font files rules event.
-    events.on(this.fontsRulesEvent, (rules, params) => (
-      this.updateFontsRules(rules, params.target, app.get('targets'))
+    // Add the listener for the event that updates the external dependencies.
+    events.on(this._externalSettingsEventName, (externals, params) => (
+      this._updateExternals(externals, params.target)
     ));
-    // Add the listener for the font files rules event.
-    events.on(this.imagesRulesEvent, (rules, params) => (
-      this.updateImagesRules(rules, params.target, app.get('targets'))
-    ));
-    // Add the listener for the target configuration event.
-    events.on(
-      this.targetEventName,
-      (config, params) => this.updateTargetConfiguration(config, params.target)
-    );
   }
   /**
-   * This method gets called when projext reduces the JS rules of a target. It validates the target
-   * settings and makes the necessary modifications to the Babel loader configuration.
-   * @param {Array}   currentRules The list of JS rules for the webpack configuration.
-   * @param {Target}  target       The target information.
-   * @param {Targets} targets      The targets service, to get the information of targets the
-   *                               one being processed may need for SSR.
-   * @return {Array} The updated list of rules.
+   * This method gets called when projext creates the file rules for a target. The method validates
+   * the target settings and, if needed, add the paths of another target for SSR.
+   * @param {TargetFilesRules} rules   The file rules for the target.
+   * @param {Target}           target  The target information.
+   * @param {Targets}          targets The targets service, to get the information of targets
+   *                                   the one being processed may need for SSR.
+   * @access protected
+   * @ignore
    */
-  updateJSRules(currentRules, target, targets) {
-    let updatedRules;
-    // If the target `framework` setting is the right one...
-    if (target.framework === this.frameworkProperty) {
-      // ...copy the list of rules.
-      updatedRules = currentRules.slice();
-      // Get the first rule of the list (there's usually only one).
-      const [baseJSRule] = updatedRules;
-      // Get the index of the Babel loader.
-      const babelLoaderIndex = this._findBabelLoaderIndex(baseJSRule.use);
-      // If the Babel loader is preset...
-      if (babelLoaderIndex > -1) {
-        // ...get the framework options for the target.
-        const options = this._getTargetOptions(target);
-        // Push the paths for SSR targets
-        baseJSRule.include.push(...options.ssr.map((name) => {
-          const targetInfo = targets.getTarget(name);
-          return new RegExp(targetInfo.folders.source);
-        }));
-
-        // ...replace it with an updated version.
-        baseJSRule.use[babelLoaderIndex] = this._updateBabelLoader(
-          baseJSRule.use[babelLoaderIndex],
-          target.hot
-        );
-      }
-    } else {
-      // ...otherwise, just set to return the received rules.
-      updatedRules = currentRules;
-    }
-
-    // Return the updated rules
-    return currentRules;
-  }
-  /**
-   * This method gets called when projext reduces the SCSS rules of a target. It validates the
-   * target settings, and if the target implements SSR, it adds the `include` setting on the rule
-   * for the SSR targets directories.
-   * @param {Array}   currentRules The list of fonts rules for the webpack configuration.
-   * @param {Target}  target       The target information.
-   * @param {Targets} targets      The targets service, to get the SSR targets information.
-   * @return {Array} The updated list of rules.
-   */
-  updateStylesRules(currentRules, target, targets) {
-    let updatedRules;
-    // If the target `framework` setting is the right one...
-    if (target.framework === this.frameworkProperty) {
-      // ...copy the list of rules.
-      updatedRules = currentRules.slice();
-      // Get the first rule of the list (there's usually only one).
-      const [mainRule] = updatedRules;
-      // Get the target framework options.
+  _updateTargetFileRules(rules, target, targets) {
+    if (target.framework === this._frameworkProperty) {
       const options = this._getTargetOptions(target);
-      // If the `include` option is a list, keep it like that, otherwise, convert it into a list.
-      const include = Array.isArray(mainRule.include) ?
-        mainRule.include :
-        [mainRule.include];
-
-      // Loop all the possible SSR targets and add their paths to the `include` option.
-      include.push(...options.ssr.map((name) => (
-        new RegExp(targets.getTarget(name).folders.source)
-      )));
-
-      // Overwrite the rule `include` option.
-      mainRule.include = include;
-    } else {
-      // ...otherwise, just set to return the received rules.
-      updatedRules = currentRules;
+      options.ssr.forEach((name) => {
+        const ssrTarget = targets.getTarget(name);
+        rules.js.addTarget(ssrTarget);
+        rules.scss.addTarget(ssrTarget);
+        rules.fonts.common.addTarget(ssrTarget);
+        rules.fonts.svg.addTarget(ssrTarget);
+        rules.images.addTarget(ssrTarget);
+      });
     }
-
-    // Return the updated rules.
-    return updatedRules;
   }
   /**
-   * This method gets called when projext reduces the fonts files rules of a target. It validates
-   * the target settings, and if the target implements SSR, it adds the `include` setting on
-   * the SVG rule for the SSR targets directories.
-   * @param {Array}   currentRules The list of fonts rules for the webpack configuration.
-   * @param {Target}  target       The target information.
-   * @param {Targets} targets      The targets service, to get the SSR targets information.
-   * @return {Array} The updated list of rules.
+   * This method gets called when projext reduces a target Babel configuration. The method will
+   * validate the target settings and add the Babel plugins needed for JSX and HMR.
+   * @param {Object}      currentConfiguration The current Babel configuration for the target.
+   * @param {Target}      target               The target information.
+   * @param {BabelHelper} babelHelper          To update the target configuration and add the
+   *                                           required preset and plugin.
+   * @return {Object} The updated configuration.
+   * @access protected
+   * @ignore
    */
-  updateFontsRules(currentRules, target, targets) {
-    let updatedRules;
-    // If the target `framework` setting is the right one...
-    if (target.framework === this.frameworkProperty) {
-      // ...copy the list of rules.
-      updatedRules = currentRules.slice();
-      // Find the loader used for SVG files.
-      const svgLoader = updatedRules.find((rule) => '.svg'.match(rule.test));
-      // If the loader was found...
-      if (svgLoader) {
-        // ...get the target framework options.
-        const options = this._getTargetOptions(target);
-        // If the `include` option is a list, keep it like that, otherwise, convert it into a list.
-        const include = Array.isArray(svgLoader.include) ?
-          svgLoader.include :
-          [svgLoader.include];
-
-        // Loop all the possible SSR targets and add their _"fonts path"_ to the `include` option.
-        include.push(...options.ssr.map((name) => (
-          this._getTargetFontsRegExp(targets.getTarget(name))
-        )));
-
-        // Overwrite the SVG loder `include` option.
-        svgLoader.include = include;
+  _updateBabelConfiguration(currentConfiguration, target, babelHelper) {
+    let updatedConfiguration;
+    if (target.framework === this._frameworkProperty) {
+      updatedConfiguration = babelHelper.addPreset(currentConfiguration, this._babelPreset);
+      if (target.hot) {
+        updatedConfiguration = babelHelper.disableEnvPresetModules(currentConfiguration);
+        updatedConfiguration = babelHelper.addPlugin(updatedConfiguration, this._hotPlugin);
       }
     } else {
-      // ...otherwise, just set to return the received rules.
-      updatedRules = currentRules;
+      updatedConfiguration = currentConfiguration;
     }
 
-    // Return the updated rules.
-    return updatedRules;
-  }
-  /**
-   * This method gets called when projext reduces the images files rules of a target. It validates
-   * the target settings, and if the target implements SSR, it adds the `exclude` setting on
-   * the SVG rule for the SSR targets fonts directories.
-   * @param {Array}   currentRules The list of fonts rules for the webpack configuration.
-   * @param {Target}  target       The target information.
-   * @param {Targets} targets      The targets service, to get the SSR targets information.
-   * @return {Array} The updated list of rules.
-   */
-  updateImagesRules(currentRules, target, targets) {
-    let updatedRules;
-    // If the target `framework` setting is the right one...
-    if (target.framework === this.frameworkProperty) {
-      // ...copy the list of rules.
-      updatedRules = currentRules.slice();
-      // Find the loader used for SVG files.
-      const svgLoader = updatedRules.find((rule) => '.svg'.match(rule.test));
-      // If the loader was found...
-      if (svgLoader) {
-        // ...get the target framework options.
-        const options = this._getTargetOptions(target);
-        // If the `exclude` option is a list, keep it like that, otherwise, convert it into a list.
-        const exclude = Array.isArray(svgLoader.exclude) ?
-          svgLoader.exclude :
-          [svgLoader.exclude];
-
-        // Loop all the possible SSR targets and add their _"fonts path"_ to the `exclude` option.
-        exclude.push(...options.ssr.map((name) => (
-          this._getTargetFontsRegExp(targets.getTarget(name))
-        )));
-
-        // Overwrite the SVG loder `exclude` option.
-        svgLoader.exclude = exclude;
-      }
-    } else {
-      // ...otherwise, just set to return the received rules.
-      updatedRules = currentRules;
-    }
-
-    // Return the updated rules.
-    return updatedRules;
+    return updatedConfiguration;
   }
   /**
    * This method gets called when projext reduces a target configuration for Wepack. It validates
@@ -279,11 +179,13 @@ class ProjextReactPlugin {
    * @param {Object} currentConfiguration The current configuration for the target.
    * @param {Target} target               The target information.
    * @return {Object} The updated configuration.
+   * @access protected
+   * @ignore
    */
-  updateTargetConfiguration(currentConfiguration, target) {
+  _updateTargetEntry(currentConfiguration, target) {
     let updatedConfiguration;
     // If the target `framework` and `hot` have the required values...
-    if (target.framework === this.frameworkProperty && target.hot) {
+    if (target.framework === this._frameworkProperty && target.hot) {
       // Copy the configuration.
       updatedConfiguration = Object.assign({}, currentConfiguration);
       // Update the `publicPath`, required by the loader.
@@ -297,10 +199,10 @@ class ProjextReactPlugin {
       // If the `babel-polyfill` is present...
       if (polyfillIndex > -1) {
         // ...push the required entry after it.
-        entries.splice(polyfillIndex + 1, 0, this.hotEntry);
+        entries.splice(polyfillIndex + 1, 0, this._hotEntry);
       } else {
         // ...push the required entry as the first item.
-        entries.unshift(this.hotEntry);
+        entries.unshift(this._hotEntry);
       }
     } else {
       // ...otherwise, just set to return the received configuration.
@@ -308,6 +210,33 @@ class ProjextReactPlugin {
     }
 
     return updatedConfiguration;
+  }
+  /**
+   * This method gets called when the webpack plugin reduces the list of modules that should be
+   * handled as external dependencies. The method validates the target settings and if it's a
+   * Node target or a browser library, it pushes the React packages to the list.
+   * @param {Object} currentExternals A dictionary of external dependencies with the format
+   *                                  webpack uses: `{ 'module': 'commonjs module'}`.
+   * @param {Target} target           The target information.
+   * @return {Object} The updated externals dictionary.
+   * @access protected
+   * @ignore
+   */
+  _updateExternals(currentExternals, target) {
+    let updatedExternals;
+    if (
+      target.framework === this._frameworkProperty &&
+      (target.is.node || target.library)
+    ) {
+      updatedExternals = Object.assign({}, currentExternals);
+      this._externalModules.forEach((name) => {
+        updatedExternals[name] = `commonjs ${name}`;
+      });
+    } else {
+      updatedExternals = currentExternals;
+    }
+
+    return updatedExternals;
   }
   /**
    * Merge the default framework options with the overwrites the target may have, and return the
@@ -323,90 +252,6 @@ class ProjextReactPlugin {
       this.frameworkOptions,
       target.frameworkOptions || {}
     );
-  }
-  /**
-   * Gets the RegExp for a fonts folder inside a given target source directory. This is used on
-   * the fonts SVG loader to `include` the files and on the images SVG loader to `exclude` them,
-   * that way SVG files inside a folder that matches the RegExp get handled as fonts and if they
-   * don't match it, they get handled as images.
-   * @param {Target} target The target information.
-   * @return {RegExp}
-   * @ignore
-   * @access protected
-   */
-  _getTargetFontsRegExp(target) {
-    return new RegExp(`${target.paths.source}/(?:.*?/)?fonts/.*?`, 'i');
-  }
-  /**
-   * Finds the index of the Babel loader on a list of loaders.
-   * @param {Array} loaders The list of loaders.
-   * @return {number}
-   * @ignore
-   * @access protected
-   */
-  _findBabelLoaderIndex(loaders) {
-    return loaders.findIndex((loader) => {
-      const isString = typeof loader === 'string';
-      return (isString && loader === this.babelLoaderName) ||
-        (!isString && loader.loader === this.babelLoaderName);
-    });
-  }
-  /**
-   * Updates an existing Babel loader configuration with the required presets and plugins to work
-   * with React code.
-   * The method will only modify the loader if is not on a string format and has an `options`
-   * object.
-   * @param {Object|string} babelLoader The loader to update.
-   * @param {boolean}       hot         Whether or not the target will run with HMR. This will
-   *                                    make the method disable the `modules` feature as is a
-   *                                    requirement of the React Hot Loader for it to be `false`.
-   * @return {Object|string}
-   * @ignore
-   * @access protected
-   */
-  _updateBabelLoader(babelLoader, hot) {
-    let updatedLoader;
-    /**
-     * If the loader is a `string` or it doesn't have an `options` property, then the project uses
-     * an external `.babelrc`, so it won't be updated.
-     */
-    if (typeof babelLoader !== 'string' && babelLoader.options) {
-      // Copy the loader reference.
-      updatedLoader = Object.assign({}, babelLoader);
-      // Access the loader options.
-      const { options } = updatedLoader;
-      // If it doesn't have a presets list, create it.
-      if (!options.presets) {
-        options.presets = [];
-      }
-      // Push the required preset.
-      options.presets.push([this.presetName]);
-      // If the target will run with HMR...
-      if (hot) {
-        // If it doesn't have a plugins list, create it.
-        if (!options.plugins) {
-          options.plugins = [];
-        }
-        // Push the required plugin.
-        options.plugins.push([this.hotPluginName]);
-        // Get the index of the `env` preset, in order to disable `modules`.
-        const envPresetIndex = options.presets.findIndex((preset) => {
-          const [presetName] = preset;
-          return presetName === 'env';
-        });
-        // If the `env` preset is present...
-        if (envPresetIndex > -1) {
-          // Get the `env` preset options.
-          const [, envPresetOptions] = options.presets[envPresetIndex];
-          // Disable `modules`.
-          envPresetOptions.modules = false;
-        }
-      }
-    } else {
-      updatedLoader = babelLoader;
-    }
-
-    return updatedLoader;
   }
 }
 
