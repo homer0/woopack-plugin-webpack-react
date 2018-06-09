@@ -1,6 +1,5 @@
 # projext plugin for React on webpack
 
-
 [![Travis](https://img.shields.io/travis/homer0/projext-plugin-webpack-react.svg?style=flat-square)](https://travis-ci.org/homer0/projext-plugin-webpack-react)
 [![Coveralls github](https://img.shields.io/coveralls/github/homer0/projext-plugin-webpack-react.svg?style=flat-square)](https://coveralls.io/github/homer0/projext-plugin-webpack-react?branch=master)
 [![David](https://img.shields.io/david/homer0/projext-plugin-webpack-react.svg?style=flat-square)](https://david-dm.org/homer0/projext-plugin-webpack-react)
@@ -12,7 +11,7 @@ Allows you to bundle a [React](https://reactjs.org/) project with [projext](http
 
 [projext](https://yarnpkg.com/en/package/projext) allows you to configure a project without adding specific settings for a module bundler, then you can decide which build engine to use. This plugin is meant to be used when you are bundling a [React](https://reactjs.org/) and you are using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/projext-plugin-webpack).
 
-It adds the required presets to the [`babel-loader`](https://yarnpkg.com/en/package/babel-loader) configuration in order to handle [`JSX`](https://facebook.github.io/jsx/) code. It also takes care of modifying the webpack settings to allow support for the [`react-hot-loader`](https://yarnpkg.com/en/package/react-hot-loader) with both, the dev server and an [Express](https://expressjs.com)/[Jimpex](https://yarnpkg.com/en/package/jimpex) target.
+It adds the required presets to the [Babel](https://babeljs.io) configuration in order to add support for [`JSX`](https://facebook.github.io/jsx/) code. It also takes care of modifying the webpack settings to implement the [`react-hot-loader`](https://yarnpkg.com/en/package/react-hot-loader) with both, the dev server and an [Express](https://expressjs.com)/[Jimpex](https://yarnpkg.com/en/package/jimpex) target.
 
 ## Information
 
@@ -36,7 +35,7 @@ Now, when your target gets builded, the plugin will check if the target is using
 
 Let's say you have a `backend` target with your Node server code, and a `frontend` target with your React code, and you want to require your `frontend` code on the `backend` in order to use `ReactDOM.renderToString(...)`:
 
-For your `backend` target you'll have to define its `framework` property to `react`, so the plugin can include the JSX loader, and then add an extra option to enable SSR from `backend` to `frontend`:
+For your `backend` target you'll have to define its `framework` property to `react`, so the plugin can include the JSX plugin, and then add an extra option to enable SSR from `backend` to `frontend`:
 
 ```js
 module.exports = {
@@ -97,7 +96,7 @@ Before doing anything, install the repository hooks:
 yarn run install-hooks
 ```
 
-### NPM/Yarn Tasks
+### Yarn/NPM Tasks
 
 | Task                     | Description                         |
 |--------------------------|-------------------------------------|
