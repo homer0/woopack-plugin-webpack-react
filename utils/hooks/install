@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 if [ -d ".git" ]; then
     ln -sv ../../utils/hooks/pre-commit.local ./.git/hooks/pre-commit
     ln -sv ../../utils/hooks/post-merge.local ./.git/hooks/post-merge
@@ -6,5 +6,5 @@ if [ -d ".git" ]; then
     exit 0
 fi
 
-echo -e "\033[31m.git directory not found"
+echo "\033[31m.git directory not found"
 exit 1
