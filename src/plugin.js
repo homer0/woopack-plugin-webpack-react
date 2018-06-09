@@ -163,8 +163,8 @@ class ProjextReactPlugin {
     if (target.framework === this._frameworkProperty) {
       updatedConfiguration = babelHelper.addPreset(currentConfiguration, this._babelPreset);
       if (target.hot) {
-        updatedConfiguration = babelHelper.disableEnvPresetModules(currentConfiguration);
         updatedConfiguration = babelHelper.addPlugin(updatedConfiguration, this._hotPlugin);
+        updatedConfiguration = babelHelper.disableEnvPresetModules(updatedConfiguration);
       }
     } else {
       updatedConfiguration = currentConfiguration;
@@ -249,7 +249,7 @@ class ProjextReactPlugin {
   _getTargetOptions(target) {
     return Object.assign(
       {},
-      this.frameworkOptions,
+      this._frameworkOptions,
       target.frameworkOptions || {}
     );
   }
