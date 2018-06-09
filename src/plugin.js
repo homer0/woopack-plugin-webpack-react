@@ -18,13 +18,13 @@ class ProjextReactPlugin {
      */
     this._rulesEvent = 'target-file-rules';
     /**
-     * The name of the reducer event the service will listen for in order to add support for JSX
-     * and HMR.
+     * The name of the reducer event the service will listen for in order to exclude React packages
+     * from the bundle when the target is for Node or it's a browser library.
      * @type {string}
      * @access protected
      * @ignore
      */
-    this._babelConfigurationEvent = 'babel-configuration';
+    this._externalSettingsEventName = 'webpack-externals-configuration';
     /**
      * The list of React packages that should never end up on the bundle. For browser targets,
      * this is only added if the target is also a library.
@@ -38,13 +38,27 @@ class ProjextReactPlugin {
       'react-dom/server',
     ];
     /**
-     * The name of the reducer event the service will listen for in order to exclude React packages
-     * from the bundle when the target is for Node or it's a browser library.
+     * The name of the reducer event the service will listen for in order to add support for JSX
+     * and HMR.
      * @type {string}
      * @access protected
      * @ignore
      */
-    this._externalSettingsEventName = 'webpack-externals-configuration';
+    this._babelConfigurationEvent = 'babel-configuration';
+    /**
+     * The name of the Babel preset required to add support for React's JSX.
+     * @type {string}
+     * @access protected
+     * @ignore
+     */
+    this._babelPreset = 'react';
+    /**
+     * The name of the plugin required for HMR.
+     * @type {string}
+     * @access protected
+     * @ignore
+     */
+    this._babelHotPlugin = 'react-hot-loader/babel';
     /**
      * The name of the reducer event the service will listen for in order to update a target entry
      * settings when the target implements HMR.
@@ -53,6 +67,13 @@ class ProjextReactPlugin {
      * @ignore
      */
     this._targetEntriesEvent = 'webpack-browser-development-configuration';
+    /**
+     * The name of the required entry in order to enable HMR.
+     * @type {string}
+     * @access protected
+     * @ignore
+     */
+    this._hotEntry = 'react-hot-loader/patch';
     /**
      * The required value a target `framework` setting needs to have in order for the service to
      * take action.
@@ -72,27 +93,6 @@ class ProjextReactPlugin {
     this._frameworkOptions = {
       ssr: [],
     };
-    /**
-     * The name of the Babel preset required to add support for React's JSX.
-     * @type {string}
-     * @access protected
-     * @ignore
-     */
-    this._babelPreset = 'react';
-    /**
-     * The name of the plugin required for HMR.
-     * @type {string}
-     * @access protected
-     * @ignore
-     */
-    this._hotPlugin = 'react-hot-loader/babel';
-    /**
-     * The name of the required entry in order to enable HMR.
-     * @type {string}
-     * @access protected
-     * @ignore
-     */
-    this._hotEntry = 'react-hot-loader/patch';
   }
   /**
    * This is the method called when the plugin is loaded by projext. It just gets the events service
@@ -163,7 +163,7 @@ class ProjextReactPlugin {
     if (target.framework === this._frameworkProperty) {
       updatedConfiguration = babelHelper.addPreset(currentConfiguration, this._babelPreset);
       if (target.hot) {
-        updatedConfiguration = babelHelper.addPlugin(updatedConfiguration, this._hotPlugin);
+        updatedConfiguration = babelHelper.addPlugin(updatedConfiguration, this._babelHotPlugin);
         updatedConfiguration = babelHelper.disableEnvPresetModules(updatedConfiguration);
       }
     } else {

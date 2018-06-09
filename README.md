@@ -93,7 +93,7 @@ Before doing anything, install the repository hooks:
 
 ```bash
 # You can either use npm or yarn, it doesn't matter
-yarn run install-hooks
+yarn run hooks
 ```
 
 ### Yarn/NPM Tasks
