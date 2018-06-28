@@ -1,12 +1,17 @@
 # projext plugin for React on webpack
 
+[![Travis](https://img.shields.io/travis/homer0/projext-plugin-webpack-react.svg?style=flat-square)](https://travis-ci.org/homer0/projext-plugin-webpack-react)
+[![Coveralls github](https://img.shields.io/coveralls/github/homer0/projext-plugin-webpack-react.svg?style=flat-square)](https://coveralls.io/github/homer0/projext-plugin-webpack-react?branch=master)
+[![David](https://img.shields.io/david/homer0/projext-plugin-webpack-react.svg?style=flat-square)](https://david-dm.org/homer0/projext-plugin-webpack-react)
+[![David](https://img.shields.io/david/dev/homer0/projext-plugin-webpack-react.svg?style=flat-square)](https://david-dm.org/homer0/projext-plugin-webpack-react)
+
 Allows you to bundle a [React](https://reactjs.org/) project with [projext](https://yarnpkg.com/en/package/projext) using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/projext-plugin-webpack).
 
 ## Introduction
 
 [projext](https://yarnpkg.com/en/package/projext) allows you to configure a project without adding specific settings for a module bundler, then you can decide which build engine to use. This plugin is meant to be used when you are bundling a [React](https://reactjs.org/) and you are using the [webpack](https://webpack.js.org) [build engine](https://yarnpkg.com/en/package/projext-plugin-webpack).
 
-It adds the required presets to the [`babel-loader`](https://yarnpkg.com/en/package/babel-loader) configuration in order to handle [`JSX`](https://facebook.github.io/jsx/) code. It also takes care of modifying the webpack settings in order to implement the [`react-hot-loader`](https://yarnpkg.com/en/package/react-hot-loader) with both, the dev server and an [Express](https://expressjs.com)/[Jimpex](https://yarnpkg.com/en/package/jimpex) target.
+It adds the required presets to the [Babel](https://babeljs.io) configuration in order to add support for [`JSX`](https://facebook.github.io/jsx/) code. It also takes care of modifying the webpack settings to implement the [`react-hot-loader`](https://yarnpkg.com/en/package/react-hot-loader) with both, the dev server and an [Express](https://expressjs.com)/[Jimpex](https://yarnpkg.com/en/package/jimpex) target.
 
 ## Information
 
@@ -19,8 +24,7 @@ It adds the required presets to the [`babel-loader`](https://yarnpkg.com/en/pack
 ## Usage
 
 1. You first need the build engine, so install [`projext-plugin-webpack`](https://yarnpkg.com/en/package/projext-plugin-webpack).
-2. If you changed it, set your target `engine` setting to `webpack`.
-3. Add a new setting to your target named `framework` and set its value to `react`.
+2. Add a new setting to your target named `framework` and set its value to `react`.
 4. Done
 
 Now, when your target gets builded, the plugin will check if the target is using webpack and if the framework is React, then it will make the necessary changes to bundle the `JSX` code.
@@ -31,7 +35,7 @@ Now, when your target gets builded, the plugin will check if the target is using
 
 Let's say you have a `backend` target with your Node server code, and a `frontend` target with your React code, and you want to require your `frontend` code on the `backend` in order to use `ReactDOM.renderToString(...)`:
 
-For your `backend` target you'll have to define its `framework` property to `react`, so the plugin can include the JSX loader, and then add an extra option to enable SSR from `backend` to `frontend`:
+For your `backend` target you'll have to define its `framework` property to `react`, so the plugin can include the JSX loader, and then make sure you included the `frontend` target on the `includeTargets` setting:
 
 ```js
 module.exports = {
@@ -39,15 +43,13 @@ module.exports = {
     backend: {
       type: 'node',
       framework: 'react',
-      frameworkOptions: {
-        ssr: ['frontend'],
-      },
+      includeTargets: ['frontend'],
     },
   },
 };
 ```
 
-This new setting (`frameworkOptions.ssr`) is where you tell the plugin that the targets on that list should also have their JSX parsed for you to use on Node.
+> `includeTargets` is a default setting provided by project. It tells the build engine that the files from the specified target(s) should also be transpiled/processed.
 
 Done, now you can `require`/`import` files from your `frontend` target on the `backend` target and everything will work.
 
@@ -75,14 +77,13 @@ And that's all there is, if you are running the target by itself, it will config
 
 ### Babel
 
-This plugin only adds a new loader when hot reload is enabled, but leaving that aside, the only thing it does is modify the [Babel](https://babeljs.io) configuration in order to add the required changes:
+This plugin adds the [`react`](https://yarnpkg.com/en/package/babel-preset-react) preset for JSX support, and if hot reload is enabled, the [`react-hot-loader/babel`](https://yarnpkg.com/en/package/react-hot-loader) plugin.
 
-- Presets: `react`
-- Plugins: `react-hot-loader/babel`
-- It disables the `modules` feature on the `env` preset.
+If hot reload is enabled, the plugin also disables the `module` feature from the [`env`](https://yarnpkg.com/en/package/babel-preset-env) preset.
 
+### External dependencies
 
-So, if for some reason you are overwriting the configuration projext generates, instead of making sure you add those requirements, you should consider if you really need this plugin: The only advantage it can provide is the auto-configuration of the hot reload (which is kind of tricky :P), but if you are not using hot reload, you could just add the `react` preset when you overwrite the Babel configuration that would be all.
+When bundling your targets, the plugin will check if the target is for Node or if it is a browser library and automatically exclude the React packages so they don't end up on your build.
 
 ## Development
 
@@ -90,18 +91,18 @@ Before doing anything, install the repository hooks:
 
 ```bash
 # You can either use npm or yarn, it doesn't matter
-npm run install-hooks
+yarn run hooks
 ```
 
-### NPM/Yarn Tasks
+### Yarn/NPM Tasks
 
-| Task                    | Description                         |
-|-------------------------|-------------------------------------|
-| `npm run install-hooks` | Install the GIT repository hooks.   |
-| `npm test`              | Run the project unit tests.         |
-| `npm run lint`          | Lint the modified files.            |
-| `npm run lint:full`     | Lint the project code.              |
-| `npm run docs`          | Generate the project documentation. |
+| Task                     | Description                         |
+|--------------------------|-------------------------------------|
+| `yarn run hooks`         | Install the GIT repository hooks.   |
+| `yarn test`              | Run the project unit tests.         |
+| `yarn run lint`          | Lint the modified files.            |
+| `yarn run lint:full`     | Lint the project code.              |
+| `yarn run docs`          | Generate the project documentation. |
 
 ### Testing
 
