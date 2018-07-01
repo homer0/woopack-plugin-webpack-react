@@ -31,15 +31,17 @@
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/plugin.js~ProjextReactPlugin.html">ProjextReactPlugin</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://homer0.github.io/projext/class/src/app/index.js~Projext.html">Projext</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://homer0.github.io/projext/typedef/index.html#static-typedef-Target">Target</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://homer0.github.io/projext/class/src/services/targets/targets.js~Targets.html">Targets</a></span></span></li>
 </ul>
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="projext-plugin-for-react-on-webpack">projext plugin for React on webpack</h1><p>Allows you to bundle a <a href="https://reactjs.org/">React</a> project with <a href="https://yarnpkg.com/en/package/projext">projext</a> using the <a href="https://webpack.js.org">webpack</a> <a href="https://yarnpkg.com/en/package/projext-plugin-webpack">build engine</a>.</p>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="projext-plugin-for-react-on-webpack">projext plugin for React on webpack</h1><p><a href="https://travis-ci.org/homer0/projext-plugin-webpack-react"><img src="https://img.shields.io/travis/homer0/projext-plugin-webpack-react.svg?style=flat-square" alt="Travis"></a>
+<a href="https://coveralls.io/github/homer0/projext-plugin-webpack-react?branch=master"><img src="https://img.shields.io/coveralls/github/homer0/projext-plugin-webpack-react.svg?style=flat-square" alt="Coveralls github"></a>
+<a href="https://david-dm.org/homer0/projext-plugin-webpack-react"><img src="https://img.shields.io/david/homer0/projext-plugin-webpack-react.svg?style=flat-square" alt="David"></a>
+<a href="https://david-dm.org/homer0/projext-plugin-webpack-react"><img src="https://img.shields.io/david/dev/homer0/projext-plugin-webpack-react.svg?style=flat-square" alt="David"></a></p>
+<p>Allows you to bundle a <a href="https://reactjs.org/">React</a> project with <a href="https://yarnpkg.com/en/package/projext">projext</a> using the <a href="https://webpack.js.org">webpack</a> <a href="https://yarnpkg.com/en/package/projext-plugin-webpack">build engine</a>.</p>
 <h2 id="introduction">Introduction</h2><p><a href="https://yarnpkg.com/en/package/projext">projext</a> allows you to configure a project without adding specific settings for a module bundler, then you can decide which build engine to use. This plugin is meant to be used when you are bundling a <a href="https://reactjs.org/">React</a> and you are using the <a href="https://webpack.js.org">webpack</a> <a href="https://yarnpkg.com/en/package/projext-plugin-webpack">build engine</a>.</p>
-<p>It adds the required presets to the <a href="https://yarnpkg.com/en/package/babel-loader"><code>babel-loader</code></a> configuration in order to handle <a href="https://facebook.github.io/jsx/"><code>JSX</code></a> code. It also takes care of modifying the webpack settings in order to implement the <a href="https://yarnpkg.com/en/package/react-hot-loader"><code>react-hot-loader</code></a> with both, the dev server and an <a href="https://expressjs.com">Express</a>/<a href="https://yarnpkg.com/en/package/jimpex">Jimpex</a> target.</p>
+<p>It adds the required presets to the <a href="https://babeljs.io">Babel</a> configuration in order to add support for <a href="https://facebook.github.io/jsx/"><code>JSX</code></a> code. It also takes care of modifying the webpack settings to implement the <a href="https://yarnpkg.com/en/package/react-hot-loader"><code>react-hot-loader</code></a> with both, the dev server and an <a href="https://expressjs.com">Express</a>/<a href="https://yarnpkg.com/en/package/jimpex">Jimpex</a> target.</p>
 <h2 id="information">Information</h2><table>
 <thead>
 <tr>
@@ -64,7 +66,6 @@
 </table>
 <h2 id="usage">Usage</h2><ol>
 <li>You first need the build engine, so install <a href="https://yarnpkg.com/en/package/projext-plugin-webpack"><code>projext-plugin-webpack</code></a>.</li>
-<li>If you changed it, set your target <code>engine</code> setting to <code>webpack</code>.</li>
 <li>Add a new setting to your target named <code>framework</code> and set its value to <code>react</code>.</li>
 <li>Done</li>
 </ol>
@@ -73,20 +74,20 @@
 <p>Server side rendering (SSR) is when you render your application on the server (backend) as a string, serve it on the browser and then you app runs in order to add all the JS magic.</p>
 </blockquote>
 <p>Let&apos;s say you have a <code>backend</code> target with your Node server code, and a <code>frontend</code> target with your React code, and you want to require your <code>frontend</code> code on the <code>backend</code> in order to use <code>ReactDOM.renderToString(...)</code>:</p>
-<p>For your <code>backend</code> target you&apos;ll have to define its <code>framework</code> property to <code>react</code>, so the plugin can include the JSX loader, and then add an extra option to enable SSR from <code>backend</code> to <code>frontend</code>:</p>
+<p>For your <code>backend</code> target you&apos;ll have to define its <code>framework</code> property to <code>react</code>, so the plugin can include the JSX loader, and then make sure you included the <code>frontend</code> target on the <code>includeTargets</code> setting:</p>
 <pre><code class="lang-js"><code class="source-code prettyprint">module.exports = {
   targets: {
     backend: {
       type: &apos;node&apos;,
       framework: &apos;react&apos;,
-      frameworkOptions: {
-        ssr: [&apos;frontend&apos;],
-      },
+      includeTargets: [&apos;frontend&apos;],
     },
   },
 };</code>
 </code></pre>
-<p>This new setting (<code>frameworkOptions.ssr</code>) is where you tell the plugin that the targets on that list should also have their JSX parsed for you to use on Node.</p>
+<blockquote>
+<p><code>includeTargets</code> is a default setting provided by project. It tells the build engine that the files from the specified target(s) should also be transpiled/processed.</p>
+</blockquote>
 <p>Done, now you can <code>require</code>/<code>import</code> files from your <code>frontend</code> target on the <code>backend</code> target and everything will work.</p>
 <h3 id="hot-loader">Hot loader</h3><blockquote>
 <p>If you don&apos;t know what hot reload is, you should probably watch <a href="https://www.youtube.com/watch?v=xsSnOQynTHs">Dan Abramov&apos;s talk on Hot Reloading with Time Travel</a>.</p>
@@ -106,18 +107,14 @@
 <blockquote>
 <p>If you don&apos;t know how to implement the middlewares on your Express/Jimpex app, you can check <a href="https://homer0.github.io/projext-plugin-webpack/#middleware-implementation">the <code>projext-plugin-webpack</code> documentation for it</a>.</p>
 </blockquote>
-<h3 id="babel">Babel</h3><p>This plugin only adds a new loader when hot reload is enabled, but leaving that aside, the only thing it does is modify the <a href="https://babeljs.io">Babel</a> configuration in order to add the required changes:</p>
-<ul>
-<li>Presets: <code>react</code></li>
-<li>Plugins: <code>react-hot-loader/babel</code></li>
-<li>It disables the <code>modules</code> feature on the <code>env</code> preset.</li>
-</ul>
-<p>So, if for some reason you are overwriting the configuration projext generates, instead of making sure you add those requirements, you should consider if you really need this plugin: The only advantage it can provide is the auto-configuration of the hot reload (which is kind of tricky :P), but if you are not using hot reload, you could just add the <code>react</code> preset when you overwrite the Babel configuration that would be all.</p>
+<h3 id="babel">Babel</h3><p>This plugin adds the <a href="https://yarnpkg.com/en/package/babel-preset-react"><code>react</code></a> preset for JSX support, and if hot reload is enabled, the <a href="https://yarnpkg.com/en/package/react-hot-loader"><code>react-hot-loader/babel</code></a> plugin.</p>
+<p>If hot reload is enabled, the plugin also disables the <code>module</code> feature from the <a href="https://yarnpkg.com/en/package/babel-preset-env"><code>env</code></a> preset.</p>
+<h3 id="external-dependencies">External dependencies</h3><p>When bundling your targets, the plugin will check if the target is for Node or if it is a browser library and automatically exclude the React packages so they don&apos;t end up on your build.</p>
 <h2 id="development">Development</h2><p>Before doing anything, install the repository hooks:</p>
 <pre><code class="lang-bash"><code class="source-code prettyprint"># You can either use npm or yarn, it doesn&apos;t matter
-npm run install-hooks</code>
+yarn run hooks</code>
 </code></pre>
-<h3 id="npm-yarn-tasks">NPM/Yarn Tasks</h3><table>
+<h3 id="yarn-npm-tasks">Yarn/NPM Tasks</h3><table>
 <thead>
 <tr>
 <th>Task</th>
@@ -126,23 +123,23 @@ npm run install-hooks</code>
 </thead>
 <tbody>
 <tr>
-<td><code>npm run install-hooks</code></td>
+<td><code>yarn run hooks</code></td>
 <td>Install the GIT repository hooks.</td>
 </tr>
 <tr>
-<td><code>npm test</code></td>
+<td><code>yarn test</code></td>
 <td>Run the project unit tests.</td>
 </tr>
 <tr>
-<td><code>npm run lint</code></td>
+<td><code>yarn run lint</code></td>
 <td>Lint the modified files.</td>
 </tr>
 <tr>
-<td><code>npm run lint:full</code></td>
+<td><code>yarn run lint:full</code></td>
 <td>Lint the project code.</td>
 </tr>
 <tr>
-<td><code>npm run docs</code></td>
+<td><code>yarn run docs</code></td>
 <td>Generate the project documentation.</td>
 </tr>
 </tbody>
@@ -154,7 +151,7 @@ npm run install-hooks</code>
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>
