@@ -40,7 +40,7 @@ class ProjextReactPlugin {
      * @access protected
      * @ignore
      */
-    this._babelPreset = 'react';
+    this._babelPreset = '@babel/preset-react';
     /**
      * The name of the plugin required for HMR.
      * @type {string}

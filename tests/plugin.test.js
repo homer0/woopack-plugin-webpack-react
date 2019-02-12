@@ -99,7 +99,7 @@ describe('plugin:projextReact/main', () => {
     let sut = null;
     let reducer = null;
     let result = null;
-    const expectedPreset = 'react';
+    const expectedPreset = '@babel/preset-react';
     // When
     sut = new ProjextReactPlugin();
     sut.register(app);
@@ -138,7 +138,7 @@ describe('plugin:projextReact/main', () => {
     let sut = null;
     let reducer = null;
     let result = null;
-    const expectedPreset = 'react';
+    const expectedPreset = '@babel/preset-react';
     const expectedPlugin = 'react-hot-loader/babel';
     const expectedConfigWithPreset = {
       preset: expectedPreset,

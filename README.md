@@ -19,7 +19,7 @@ It adds the required presets to the [Babel](https://babeljs.io) configuration in
 |--------------|----------------------------------------------------------------------------------------|
 | Package      | projext-plugin-webpack-react.                                                          |
 | Description  | Allows you to bundle a React project with projext using the webpack build engine.      |
-| Node Version | >= v6.10.0                                                                             |
+| Node Version | >= v8.0.0                                                                             |
 
 ## Usage
 
@@ -77,9 +77,9 @@ And that's all there is, if you are running the target by itself, it will config
 
 ### Babel
 
-This plugin adds the [`react`](https://yarnpkg.com/en/package/babel-preset-react) preset for JSX support, and if hot reload is enabled, the [`react-hot-loader/babel`](https://yarnpkg.com/en/package/react-hot-loader) plugin.
+This plugin adds the [`react`](https://yarnpkg.com/en/package/@babel/preset-react) preset for JSX support, and if hot reload is enabled, the [`react-hot-loader/babel`](https://yarnpkg.com/en/package/react-hot-loader) plugin.
 
-If hot reload is enabled, the plugin also disables the `module` feature from the [`env`](https://yarnpkg.com/en/package/babel-preset-env) preset.
+If hot reload is enabled, the plugin also disables the `module` feature from the [`env`](https://yarnpkg.com/en/package/@babel/preset-env) preset.
 
 ### External dependencies
 
