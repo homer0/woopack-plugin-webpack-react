@@ -60,7 +60,7 @@
 </tr>
 <tr>
 <td>Node Version</td>
-<td>&gt;= v6.10.0</td>
+<td>&gt;= v8.0.0</td>
 </tr>
 </tbody>
 </table>
@@ -107,14 +107,10 @@
 <blockquote>
 <p>If you don&apos;t know how to implement the middlewares on your Express/Jimpex app, you can check <a href="https://homer0.github.io/projext-plugin-webpack/#middleware-implementation">the <code>projext-plugin-webpack</code> documentation for it</a>.</p>
 </blockquote>
-<h3 id="babel">Babel</h3><p>This plugin adds the <a href="https://yarnpkg.com/en/package/babel-preset-react"><code>react</code></a> preset for JSX support, and if hot reload is enabled, the <a href="https://yarnpkg.com/en/package/react-hot-loader"><code>react-hot-loader/babel</code></a> plugin.</p>
-<p>If hot reload is enabled, the plugin also disables the <code>module</code> feature from the <a href="https://yarnpkg.com/en/package/babel-preset-env"><code>env</code></a> preset.</p>
+<h3 id="babel">Babel</h3><p>This plugin adds the <a href="https://yarnpkg.com/en/package/@babel/preset-react"><code>react</code></a> preset for JSX support, and if hot reload is enabled, the <a href="https://yarnpkg.com/en/package/react-hot-loader"><code>react-hot-loader/babel</code></a> plugin.</p>
+<p>If hot reload is enabled, the plugin also disables the <code>module</code> feature from the <a href="https://yarnpkg.com/en/package/@babel/preset-env"><code>env</code></a> preset.</p>
 <h3 id="external-dependencies">External dependencies</h3><p>When bundling your targets, the plugin will check if the target is for Node or if it is a browser library and automatically exclude the React packages so they don&apos;t end up on your build.</p>
-<h2 id="development">Development</h2><p>Before doing anything, install the repository hooks:</p>
-<pre><code class="lang-bash"><code class="source-code prettyprint"># You can either use npm or yarn, it doesn&apos;t matter
-yarn run hooks</code>
-</code></pre>
-<h3 id="yarn-npm-tasks">Yarn/NPM Tasks</h3><table>
+<h2 id="development">Development</h2><h3 id="yarn-npm-tasks">Yarn/NPM Tasks</h3><table>
 <thead>
 <tr>
 <th>Task</th>
@@ -122,10 +118,6 @@ yarn run hooks</code>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>yarn run hooks</code></td>
-<td>Install the GIT repository hooks.</td>
-</tr>
 <tr>
 <td><code>yarn test</code></td>
 <td>Run the project unit tests.</td>
